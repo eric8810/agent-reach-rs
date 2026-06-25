@@ -1,0 +1,53 @@
+[package]
+name = "agent-reach"
+version = "1.5.0"
+edition = "2021"
+description = "Give your AI Agent eyes to see the entire internet. Search + Read 10+ platforms — Rust port."
+readme = "README.md"
+license = "MIT"
+authors = ["Neo Reid (original Python)", "Rust port"]
+keywords = [
+    "ai-agent", "llm-tools", "agent-infrastructure", "mcp",
+    "web-reader", "web-scraper", "search",
+    "twitter-scraper", "reddit-scraper", "youtube-transcript",
+    "bilibili", "xiaohongshu",
+    "ai-search", "cli", "automation",
+]
+categories = ["command-line-utilities", "web-programming"]
+
+[dependencies]
+clap = { version = "4", features = ["derive", "env"] }
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1"
+log = "0.4"
+env_logger = "0.11"
+colored = "2"
+dirs = "5"
+anyhow = "1"
+thiserror = "2"
+ureq = { version = "2", features = ["json", "cookies"] }
+rss = "2"
+atom_syndication = "0.12"
+dotenvy = "0.15"
+regex = "1"
+chrono = "0.4"
+url = "2"
+which = "7"
+rusqlite = { version = "0.31", features = ["bundled"] }
+base64 = "0.22"
+tempfile = "3"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.58", features = ["Win32_Security_Cryptography", "Win32_Foundation"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+# security framework is used via CLI `security` command, no extra crate needed
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"
+
+[[bin]]
+name = "agent-reach"
+path = "src/main.rs"
