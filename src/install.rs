@@ -708,56 +708,13 @@ fn install_bili_deps(safe_mode: bool, dry_run: bool) {
 
 /// Install Agent Reach skill to agent directories.
 ///
-/// Looks for skill directories in priority order:
-/// - OPENCLAW_HOME/.openclaw/skills (if env var set)
-/// - ~/.agents/skills
-/// - ~/.openclaw/skills
-/// - ~/.claude/skills
-///
-/// Falls back to creating ~/.agents/skills/agent-reach if none found.
+/// Delegates to the skill module which embeds SKILL.md content and
+/// copies it to known agent skill directories.
 pub fn install_skill() {
     println!("Installing agent skill...");
-
-    // The Python version copies SKILL.md and references/ from the package.
-    // In the Rust binary, we don't bundle these files in the same way.
-    // For now, print instructions — the Python CLI handles this natively.
-    // Users can also run: agent-reach skill --install
-
-    let skill_dirs: Vec<(PathBuf, &str)> = {
-        let home = dirs::home_dir().unwrap_or_else(|| PathBuf::from("."));
-        let mut dirs = Vec::new();
-
-        // OPENCLAW_HOME
-        if let Ok(oh) = std::env::var("OPENCLAW_HOME") {
-            dirs.push((PathBuf::from(oh).join(".openclaw").join("skills"), "OpenClaw"));
-        }
-
-        dirs.push((home.join(".agents").join("skills"), "Agent"));
-        dirs.push((home.join(".openclaw").join("skills"), "OpenClaw"));
-        dirs.push((home.join(".claude").join("skills"), "Claude Code"));
-
-        dirs
-    };
-
-    let mut installed = false;
-    for (base_dir, _platform) in &skill_dirs {
-        let target = base_dir.join("agent-reach");
-        if base_dir.exists() {
-            // Can't copy SKILL.md from Rust binary — guide user
-            println!("  Skill dir found: {} — SKILL.md must be copied manually", target.display());
-            println!("  Use the Python version ('agent-reach skill --install') or copy from:");
-            println!("    agent-reach-python/agent_reach/skill/");
-            installed = true;
-            break;
-        }
-    }
-
-    if !installed {
-        let fallback = dirs::home_dir()
-            .unwrap_or_else(|| PathBuf::from("."))
-            .join(".agents").join("skills").join("agent-reach");
-        println!("  No skill directory found. Create {} manually.", fallback.display());
-        println!("  Or run: agent-reach skill --install (Python version)");
+    match crate::skill::install_skill() {
+        Ok(()) => {}  // skill::install_skill prints its own messages
+        Err(e) => eprintln!("  Skill installation failed: {}", e),
     }
 }
 
