@@ -113,8 +113,8 @@ fn chromium_user_data_dir(company: &str, product: &str) -> PathBuf {
     {
         let home = dirs::home_dir().unwrap_or_default();
         // Chrome → google-chrome, Edge → microsoft-edge, Brave → brave-browser
-        let dirname = product.to_lowercase(); // approximate; "Chrome" → "chrome" matches google-chrome
-        home.join(".config").join(company.to_lowercase()).join(dirname)
+        let dirname = format!("{}-{}", company.to_lowercase(), product.to_lowercase());
+        home.join(".config").join(dirname)
     }
     #[cfg(not(any(target_os = "windows", target_os = "macos", target_os = "linux")))]
     {
@@ -401,23 +401,21 @@ fn decrypt_value(encrypted_value: &[u8]) -> Option<String> {
     }
     #[cfg(target_os = "macos")]
     {
-        // On macOS Chromium encrypts with Keychain + AES-CBC.
-        // Full decryption needs an AES dependency; plaintext fallback only for now.
-        log::debug!(
-            "macOS cookie decryption: encrypted value ({} bytes) — \
-             plaintext attempt failed, returning None",
-            encrypted_value.len()
-        );
-        return None;
+        return decrypt_macos_cookie(encrypted_value);
     }
     #[cfg(target_os = "linux")]
     {
-        // GNOME Keyring / KWallet encryption is possible but uncommon.
-        log::debug!(
-            "Linux cookie decryption: encrypted value ({} bytes) — \
-             plaintext attempt failed, returning None",
-            encrypted_value.len()
-        );
+        // On Linux, Chromium cookies are typically plaintext. If encryption
+        // (GNOME Keyring/KWallet) is in use, we cannot decrypt them.
+        use std::sync::atomic::{AtomicBool, Ordering};
+        static WARNED_LINUX: AtomicBool = AtomicBool::new(false);
+        if !WARNED_LINUX.swap(true, Ordering::Relaxed) {
+            eprintln!(
+                "Warning: Linux encrypted cookie decryption is not yet supported. \
+                 Encrypted Chrome/Edge/Brave cookies will be skipped. \
+                 Use Firefox (plaintext cookies) or run: agent-reach configure --from-browser firefox"
+            );
+        }
         return None;
     }
     #[cfg(not(any(target_os = "windows", target_os = "macos", target_os = "linux")))]
@@ -483,6 +481,147 @@ fn decrypt_windows(encrypted_value: &[u8]) -> Option<String> {
         );
         None
     }
+}
+
+// ── macOS Keychain + AES-128-CBC decryption ───────────────────────────
+
+/// Retrieve the Chrome encryption key from the macOS Keychain.
+///
+/// The key is cached after the first successful lookup (avoids repeated
+/// `security` CLI invocations for every cookie).
+///
+/// Uses the `security` CLI which ships with macOS.
+#[cfg(target_os = "macos")]
+fn get_chrome_keychain_key() -> Option<&'static [u8]> {
+    use std::sync::OnceLock;
+    static KEY: OnceLock<Option<Vec<u8>>> = OnceLock::new();
+    KEY.get_or_init(|| {
+        let result = std::process::Command::new("security")
+            .args([
+                "find-generic-password",
+                "-w",
+                "-s",
+                "Chrome Safe Storage",
+                "-a",
+                "Chrome",
+            ])
+            .stdout(std::process::Stdio::piped())
+            .stderr(std::process::Stdio::null())
+            .output();
+
+        match result {
+            Ok(output) if output.status.success() && !output.stdout.is_empty() => {
+                log::info!("macOS: Retrieved Chrome encryption key from Keychain");
+                Some(output.stdout)
+            }
+            _ => {
+                log::warn!(
+                    "macOS: Could not retrieve Chrome encryption key from Keychain. \
+                     Make sure you have launched Chrome at least once \
+                     (key is stored on first run)."
+                );
+                None
+            }
+        }
+    })
+    .as_deref()
+}
+
+/// Decrypt ciphertext using AES-128-CBC via the system `openssl` CLI.
+///
+/// `key` is truncated or zero-padded to exactly 16 bytes for AES-128.
+/// Returns the raw decrypted bytes (including PKCS7 padding).
+#[cfg(target_os = "macos")]
+fn aes_128_cbc_decrypt(key: &[u8], iv: &[u8], ciphertext: &[u8]) -> Option<Vec<u8>> {
+    use std::io::Write;
+    use std::process::{Command, Stdio};
+
+    // AES-128 requires exactly 16 bytes. Truncate or zero-pad the key.
+    let mut aes_key = [0u8; 16];
+    let copy_len = key.len().min(16);
+    aes_key[..copy_len].copy_from_slice(&key[..copy_len]);
+
+    let key_hex: String = aes_key.iter().map(|b| format!("{b:02x}")).collect();
+    let iv_hex: String = iv.iter().map(|b| format!("{b:02x}")).collect();
+
+    let mut child = Command::new("openssl")
+        .args([
+            "enc",
+            "-aes-128-cbc",
+            "-d",
+            "-K",
+            &key_hex,
+            "-iv",
+            &iv_hex,
+            "-nopad",
+        ])
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::null())
+        .spawn()
+        .ok()?;
+
+    child.stdin.as_mut()?.write_all(ciphertext).ok()?;
+    let output = child.wait_with_output().ok()?;
+
+    if output.status.success() {
+        Some(output.stdout)
+    } else {
+        log::debug!("openssl AES-128-CBC decryption failed");
+        None
+    }
+}
+
+/// Remove PKCS7 padding from a decrypted block.
+///
+/// Returns the unpadded bytes, or `None` if the padding is invalid.
+#[cfg(target_os = "macos")]
+fn pkcs7_unpad(data: &[u8]) -> Option<Vec<u8>> {
+    if data.is_empty() {
+        return None;
+    }
+    let pad_len = *data.last().unwrap() as usize;
+    // PKCS7 pads with 1–16 bytes
+    if pad_len == 0 || pad_len > 16 || pad_len > data.len() {
+        return None;
+    }
+    // Verify every padding byte equals pad_len
+    for &b in &data[data.len() - pad_len..] {
+        if b as usize != pad_len {
+            return None;
+        }
+    }
+    Some(data[..data.len() - pad_len].to_vec())
+}
+
+/// Decrypt a single Chrome cookie encrypted_value blob on macOS.
+///
+/// Format (after "v10"/"v11" prefix): IV (16 bytes) + ciphertext (AES-128-CBC, PKCS7 padded).
+#[cfg(target_os = "macos")]
+fn decrypt_macos_cookie(encrypted_value: &[u8]) -> Option<String> {
+    // Strip "v10" or "v11" 3-byte version prefix
+    let payload = if encrypted_value.len() > 3
+        && (encrypted_value.starts_with(b"v10") || encrypted_value.starts_with(b"v11"))
+    {
+        &encrypted_value[3..]
+    } else {
+        encrypted_value
+    };
+
+    // Need at least 16 bytes IV + 1 byte ciphertext
+    if payload.len() < 17 {
+        log::debug!("macOS cookie blob too short for AES-CBC: {} bytes", payload.len());
+        return None;
+    }
+
+    let iv = &payload[..16];
+    let ciphertext = &payload[16..];
+
+    let key = get_chrome_keychain_key()?;
+    let padded = aes_128_cbc_decrypt(key, iv, ciphertext)?;
+    let plaintext = pkcs7_unpad(&padded)?;
+
+    String::from_utf8(plaintext).ok()
 }
 
 // ── Public API ────────────────────────────────────────────────────────

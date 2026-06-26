@@ -23,8 +23,11 @@ pub struct Config {
     #[serde(skip)]
     config_path: PathBuf,
 
+    /// Stores all config key-value pairs. Values are `serde_yaml::Value` to
+    /// preserve typed YAML values (integers, booleans, lists) that Python may
+    /// write to the shared `~/.agent-reach/config.yaml`.
     #[serde(flatten)]
-    pub data: HashMap<String, String>,
+    pub data: HashMap<String, serde_yaml::Value>,
 }
 
 impl Config {
@@ -51,10 +54,11 @@ impl Config {
         std::fs::create_dir_all(&config_dir)
             .with_context(|| format!("Failed to create config dir: {}", config_dir.display()))?;
 
-        let data: HashMap<String, String> = if path.exists() {
+        let data: HashMap<String, serde_yaml::Value> = if path.exists() {
             let content = std::fs::read_to_string(&path)
                 .with_context(|| format!("Failed to read config: {}", path.display()))?;
-            serde_yaml::from_str(&content).unwrap_or_default()
+            serde_yaml::from_str(&content)
+                .with_context(|| format!("Failed to parse config YAML: {}", path.display()))?
         } else {
             HashMap::new()
         };
@@ -76,9 +80,17 @@ impl Config {
             // Create file with 0o600 (owner read/write only)
             let mut opts = std::fs::OpenOptions::new();
             opts.write(true).create(true).truncate(true);
-            let mut f = opts.open(&self.config_path)?;
-            f.set_permissions(std::fs::Permissions::from_mode(0o600))?;
-            f.write_all(yaml.as_bytes())?;
+            match opts.open(&self.config_path) {
+                Ok(mut f) => {
+                    // Best-effort: set permissions before writing
+                    let _ = f.set_permissions(std::fs::Permissions::from_mode(0o600));
+                    f.write_all(yaml.as_bytes())?;
+                }
+                Err(_) => {
+                    // Fallback: plain write without permission restriction (matching Python)
+                    std::fs::write(&self.config_path, &yaml)?;
+                }
+            }
         }
         #[cfg(not(unix))]
         {
@@ -89,16 +101,17 @@ impl Config {
     }
 
     /// Get a config value. Checks file first, then environment variable (uppercase).
+    /// Returns the string representation, converting typed YAML values as needed.
     pub fn get(&self, key: &str) -> Option<String> {
         if let Some(val) = self.data.get(key) {
-            return Some(val.clone());
+            return Some(value_to_string(val));
         }
         std::env::var(key.to_uppercase()).ok()
     }
 
     /// Set a config value and save.
     pub fn set(&mut self, key: &str, value: &str) -> Result<()> {
-        self.data.insert(key.to_string(), value.to_string());
+        self.data.insert(key.to_string(), serde_yaml::Value::String(value.to_string()));
         self.save()
     }
 
@@ -132,16 +145,20 @@ impl Config {
     pub fn to_masked_dict(&self) -> HashMap<String, String> {
         let mut masked = HashMap::new();
         for (k, v) in &self.data {
-            let sensitive = k.contains("key") || k.contains("token") || k.contains("password") || k.contains("proxy");
+            let s = value_to_string(v);
+            let sensitive = k.to_lowercase().contains("key")
+                || k.to_lowercase().contains("token")
+                || k.to_lowercase().contains("password")
+                || k.to_lowercase().contains("proxy");
             if sensitive {
-                let masked_val = if v.len() > 8 {
-                    format!("{}...", &v[..8])
+                let masked_val = if s.len() > 8 {
+                    format!("{}...", &s[..8])
                 } else {
                     "***".to_string()
                 };
                 masked.insert(k.clone(), masked_val);
             } else {
-                masked.insert(k.clone(), v.clone());
+                masked.insert(k.clone(), s);
             }
         }
         masked
@@ -155,5 +172,20 @@ impl Default for Config {
             config_path: Self::config_file(),
             data: HashMap::new(),
         })
+    }
+}
+
+/// Convert a `serde_yaml::Value` to its string representation.
+///
+/// Handles scalars (numbers, booleans, strings), and falls back to
+/// YAML representation for complex types (sequences, mappings).
+fn value_to_string(val: &serde_yaml::Value) -> String {
+    match val {
+        serde_yaml::Value::String(s) => s.clone(),
+        serde_yaml::Value::Number(n) => n.to_string(),
+        serde_yaml::Value::Bool(b) => b.to_string(),
+        serde_yaml::Value::Null => String::new(),
+        // For complex types, serialize back to YAML string
+        other => serde_yaml::to_string(other).unwrap_or_default().trim().to_string(),
     }
 }

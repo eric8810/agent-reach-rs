@@ -71,7 +71,14 @@ impl Channel for ExaSearchChannel {
             },
             ProbeStatus::Broken => CheckResult {
                 status: CheckStatus::Error,
-                message: probe.hint,
+                message: format!(
+                    "mcporter 无法执行（node 环境损坏），重装：\n  npm install -g mcporter{}",
+                    if !probe.hint.is_empty() {
+                        format!("\n{}", probe.hint)
+                    } else {
+                        String::new()
+                    }
+                ),
                 active_backend: None,
             },
             ProbeStatus::Timeout | ProbeStatus::Error => {

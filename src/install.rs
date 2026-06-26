@@ -13,6 +13,7 @@ use std::fs;
 use std::io::Write;
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
+use std::time::Duration;
 
 
 // ── helpers ──────────────────────────────────────────────────────────
@@ -22,19 +23,36 @@ use std::process::{Command, Stdio};
 fn run_cmd(
     program: &str,
     args: &[&str],
-    _timeout_secs: u64,
+    timeout_secs: u64,
     dry_run: bool,
 ) -> Result<String, String> {
     if dry_run {
         println!("  [dry-run] {} {}", program, args.join(" "));
         return Ok(String::new());
     }
-    let output = Command::new(program)
+    let child = Command::new(program)
         .args(args)
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
-        .output()
+        .stdin(Stdio::null())
+        .spawn()
         .map_err(|e| format!("failed to run {}: {}", program, e))?;
+
+    let pid = child.id();
+    let (tx, rx) = std::sync::mpsc::channel();
+    std::thread::spawn(move || {
+        let _ = tx.send(child.wait_with_output());
+    });
+
+    let output = match rx.recv_timeout(Duration::from_secs(timeout_secs)) {
+        Ok(Ok(out)) => out,
+        Ok(Err(e)) => return Err(format!("{} wait error: {}", program, e)),
+        Err(_) => {
+            // Best-effort kill on timeout.
+            kill_process(pid);
+            return Err(format!("{} timed out after {}s", program, timeout_secs));
+        }
+    };
 
     let stdout = String::from_utf8_lossy(&output.stdout).to_string();
     let stderr = String::from_utf8_lossy(&output.stderr).to_string();
@@ -45,16 +63,55 @@ fn run_cmd(
     }
 }
 
+/// Best-effort kill of a child process across platforms.
+fn kill_process(pid: u32) {
+    #[cfg(windows)]
+    {
+        let _ = Command::new("taskkill")
+            .args(["/F", "/PID", &pid.to_string()])
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn();
+    }
+    #[cfg(not(windows))]
+    {
+        let _ = Command::new("kill")
+            .args(["-9", &pid.to_string()])
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn();
+    }
+}
+
 /// Run a command, silently (no output printed). For status checks.
-fn run_cmd_silent(program: &str, args: &[&str], _timeout_secs: u64) -> Option<String> {
-    Command::new(program)
+fn run_cmd_silent(program: &str, args: &[&str], timeout_secs: u64) -> Option<String> {
+    let child = Command::new(program)
         .args(args)
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
-        .output()
-        .ok()
-        .filter(|o| o.status.success())
-        .map(|o| String::from_utf8_lossy(&o.stdout).to_string())
+        .stdin(Stdio::null())
+        .spawn()
+        .ok()?;
+
+    let pid = child.id();
+    let (tx, rx) = std::sync::mpsc::channel();
+    std::thread::spawn(move || {
+        let _ = tx.send(child.wait_with_output());
+    });
+
+    let output = match rx.recv_timeout(Duration::from_secs(timeout_secs)) {
+        Ok(Ok(out)) => out,
+        _ => {
+            kill_process(pid);
+            return None;
+        }
+    };
+
+    if output.status.success() {
+        Some(String::from_utf8_lossy(&output.stdout).to_string())
+    } else {
+        None
+    }
 }
 
 /// Check if a binary is on PATH.
@@ -534,12 +591,29 @@ fn install_xiaoyuzhou_deps(safe_mode: bool, dry_run: bool) {
     } else if dry_run {
         println!("  [dry-run] Would copy transcribe.sh to {}", script_dst.display());
     } else {
-        // The Python version copies transcribe.sh from the Python package.
-        // In Rust, we embed the script or look relative to the binary.
-        // For now, guide the user to copy it from the Python package.
-        println!("  [!] transcribe.sh script: copy from Python package scripts/ directory");
-        println!("     cp agent-reach-python/agent_reach/scripts/transcribe_xiaoyuzhou.sh {}", script_dst.display());
-        println!("     chmod +x {}", script_dst.display());
+        // Embed transcribe.sh as a const string and write it to disk
+        const TRANSCRIBE_SCRIPT: &str = include_str!("../scripts/transcribe_xiaoyuzhou.sh");
+        match std::fs::create_dir_all(&tools) {
+            Ok(()) => {
+                match std::fs::write(&script_dst, TRANSCRIBE_SCRIPT) {
+                    Ok(()) => {
+                        // Set executable permissions on Unix
+                        #[cfg(unix)]
+                        {
+                            use std::os::unix::fs::PermissionsExt;
+                            let _ = std::fs::set_permissions(&script_dst, std::fs::Permissions::from_mode(0o755));
+                        }
+                        println!("  ✅ Xiaoyuzhou transcription script installed");
+                    }
+                    Err(e) => {
+                        eprintln!("  [!] Could not write transcribe.sh: {}", e);
+                    }
+                }
+            }
+            Err(e) => {
+                eprintln!("  [!] Could not create tools directory: {}", e);
+            }
+        }
     }
 
     // Check ffmpeg

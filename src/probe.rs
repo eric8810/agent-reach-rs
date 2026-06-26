@@ -131,7 +131,7 @@ pub fn probe_command_with_hint(
 fn run_once(
     path: &std::path::Path,
     args: &[&str],
-    _timeout_secs: u64,
+    timeout_secs: u64,
     package: &str,
     hint_fn: fn(&str) -> String,
 ) -> ProbeResult {
@@ -140,6 +140,8 @@ fn run_once(
         .stdout(std::process::Stdio::piped())
         .stderr(std::process::Stdio::piped())
         .stdin(std::process::Stdio::null())
+        .env("PYTHONUTF8", "1")
+        .env("PYTHONIOENCODING", "utf-8")
         .spawn()
     {
         Ok(c) => c,
@@ -160,19 +162,50 @@ fn run_once(
         }
     };
 
-    // Wait with timeout
-    let result = std::process::Child::wait_with_output(child);
+    // Wait with timeout. Capture PID before moving child into thread.
+    let child_pid = child.id();
+    let (tx, rx) = std::sync::mpsc::channel();
+    std::thread::spawn(move || {
+        let _ = tx.send(child.wait_with_output());
+    });
 
-    let output = match result {
-        Ok(out) => {
-            // Check for timeout (we don't have native process timeout, check elapsed
-            // via a simple approach: just check the exit code and combined output)
-            out
-        }
-        Err(e) => {
+    let output = match rx.recv_timeout(std::time::Duration::from_secs(timeout_secs)) {
+        Ok(Ok(out)) => out,
+        Ok(Err(e)) => {
             return ProbeResult {
                 status: ProbeStatus::Broken,
                 output: e.to_string(),
+                hint: hint_fn(package),
+            };
+        }
+        Err(std::sync::mpsc::RecvTimeoutError::Timeout) => {
+            // Kill the timed-out child process
+            #[cfg(windows)]
+            {
+                let _ = std::process::Command::new("taskkill")
+                    .args(["/F", "/PID", &child_pid.to_string()])
+                    .stdout(std::process::Stdio::null())
+                    .stderr(std::process::Stdio::null())
+                    .spawn();
+            }
+            #[cfg(not(windows))]
+            {
+                let _ = std::process::Command::new("kill")
+                    .args(["-9", &child_pid.to_string()])
+                    .stdout(std::process::Stdio::null())
+                    .stderr(std::process::Stdio::null())
+                    .spawn();
+            }
+            return ProbeResult {
+                status: ProbeStatus::Timeout,
+                output: format!("`{}` timed out after {}s", path.display(), timeout_secs),
+                hint: hint_fn(package),
+            };
+        }
+        Err(std::sync::mpsc::RecvTimeoutError::Disconnected) => {
+            return ProbeResult {
+                status: ProbeStatus::Broken,
+                output: "child process disappeared".to_string(),
                 hint: hint_fn(package),
             };
         }

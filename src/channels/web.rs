@@ -26,6 +26,7 @@ impl WebChannel {
         let resp = ureq::get(&jina_url)
             .set("User-Agent", UA)
             .set("Accept", "text/plain")
+            .timeout(std::time::Duration::from_secs(30))
             .call()?;
         Ok(resp.into_string()?)
     }

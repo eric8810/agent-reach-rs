@@ -110,12 +110,23 @@ fn run_command(cmd: &str, args: &[&str], timeout_secs: u64) -> Result<(), String
         }
         Ok(Err(e)) => Err(format!("{} wait error: {}", cmd, e)),
         Err(_) => {
-            // Best-effort kill on timeout.
-            let _ = std::process::Command::new("taskkill")
-                .args(["/F", "/PID", &pid.to_string()])
-                .stdout(std::process::Stdio::null())
-                .stderr(std::process::Stdio::null())
-                .spawn();
+            // Best-effort kill on timeout — cross-platform.
+            #[cfg(windows)]
+            {
+                let _ = std::process::Command::new("taskkill")
+                    .args(["/F", "/PID", &pid.to_string()])
+                    .stdout(std::process::Stdio::null())
+                    .stderr(std::process::Stdio::null())
+                    .spawn();
+            }
+            #[cfg(not(windows))]
+            {
+                let _ = std::process::Command::new("kill")
+                    .args(["-9", &pid.to_string()])
+                    .stdout(std::process::Stdio::null())
+                    .stderr(std::process::Stdio::null())
+                    .spawn();
+            }
             Err(format!("{} timed out after {}s", cmd, timeout_secs))
         }
     }

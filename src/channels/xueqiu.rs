@@ -126,7 +126,7 @@ impl XueqiuChannel {
 
     /// Make sure the cookie store is populated.
     ///
-    /// Priority: ① config key `xueqiu_cookie`  ② homepage visit.
+    /// Priority: ① config key `xueqiu_cookie`  ② browser auto-extract  ③ homepage visit.
     fn ensure_cookies(&mut self, config: Option<&Config>) {
         if self.cookies_attempted {
             return;
@@ -136,7 +136,26 @@ impl XueqiuChannel {
         if self.load_from_config(config) {
             return;
         }
+        // Try to extract cookies from the browser (best-effort, like Python's rookiepy)
+        if self.try_browser_extract() {
+            return;
+        }
         self.load_from_homepage();
+    }
+
+    /// Try to extract xueqiu cookies from Chrome/Firefox (best-effort).
+    fn try_browser_extract(&mut self) -> bool {
+        for browser in &["chrome", "firefox"] {
+            if let Ok(extracted) = crate::cookie_extract::extract_all(browser) {
+                if let Some(crate::cookie_extract::PlatformCookies::CookieHeader(cookie_str)) = extracted.get("xueqiu") {
+                    if cookie_str.contains("xq_a_token") {
+                        self.inject_cookie_string(cookie_str);
+                        return true;
+                    }
+                }
+            }
+        }
+        false
     }
 
     /// Serialise stored cookies into a `Cookie:` header value.
@@ -324,7 +343,7 @@ impl XueqiuChannel {
         Ok(items
             .into_iter()
             .take(limit)
-            .filter_map(|item| {
+            .map(|item| {
                 // `data` is a JSON-encoded string containing the real post.
                 let data_str = item.get("data").and_then(|v| v.as_str()).unwrap_or("");
                 let post: serde_json::Value =
@@ -378,7 +397,7 @@ impl XueqiuChannel {
                         serde_json::Value::String(format!("https://xueqiu.com{target}"))
                     },
                 );
-                Some(m)
+                m
             })
             .collect())
     }
@@ -491,9 +510,16 @@ impl Channel for XueqiuChannel {
                 if item_count > 0 {
                     self.active_backend =
                         Some("Xueqiu API (需要登录 Cookie)".to_string());
+                    // Verify we have real auth cookies, not just anti-DDoS cookies
+                    let has_auth = self.cookies.contains_key("xq_a_token");
+                    let message = if has_auth {
+                        "公开 API 可用（行情、搜索、热帖、热股）".to_string()
+                    } else {
+                        "API 可达但未检测到登录 Cookie（xq_a_token），部分功能可能受限。请先登录雪球后运行：agent-reach configure --from-browser chrome".to_string()
+                    };
                     CheckResult {
-                        status: CheckStatus::Ok,
-                        message: "公开 API 可用（行情、搜索、热帖、热股）".to_string(),
+                        status: if has_auth { CheckStatus::Ok } else { CheckStatus::Warn },
+                        message,
                         active_backend: self.active_backend.clone(),
                     }
                 } else {

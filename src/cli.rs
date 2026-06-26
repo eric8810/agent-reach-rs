@@ -69,6 +69,7 @@ fn build_cli() -> Command {
         .subcommand(Command::new("check-update").about("Check for new versions"))
         .subcommand(Command::new("watch").about("Quick health check"))
         .subcommand(Command::new("setup").about("Interactive configuration wizard"))
+        .subcommand(Command::new("mcp-server").about("Start MCP server (JSON-RPC over stdio)"))
         .subcommand(
             Command::new("format")
                 .about("Clean platform API output")
@@ -96,6 +97,7 @@ pub fn run() {
         Some(("check-update", _)) => cmd_check_update(),
         Some(("watch", _)) => cmd_watch(),
         Some(("setup", _)) => cmd_setup(),
+        Some(("mcp-server", _)) => crate::mcp_server::run_mcp_server(),
         Some(("format", m)) => cmd_format(m),
         Some((name, _)) => eprintln!("Unknown command: {}", name),
         None => {}
@@ -117,6 +119,8 @@ fn cmd_doctor(json_output: bool) {
     } else {
         println!("{}", doctor::format_report(&results));
     }
+    // Auto-install agent skill if not already present (fixes #154)
+    let _ = crate::skill::install_skill();
 }
 
 fn cmd_install(sub_m: &clap::ArgMatches) {
@@ -173,6 +177,10 @@ fn cmd_configure(sub_m: &clap::ArgMatches) {
                     if k == "twitter-cookies" {
                         handle_twitter_cookies(&value);
                     }
+                    // Handle xhs-cookies: try Docker injection first, fall back to config
+                    if k == "xhs-cookies" {
+                        handle_xhs_cookies(&value, &config);
+                    }
                 }
                 Err(e) => eprintln!("Error saving config: {}", e),
             }
@@ -203,7 +211,7 @@ fn key_to_config_key(key: &str) -> &str {
         "groq-key" => "groq_api_key",
         "openai-key" => "openai_api_key",
         "twitter-cookies" => "twitter_auth_token",
-        "youtube-cookies" => "youtube_cookies",
+        "youtube-cookies" => "youtube_cookies_from",
         "xhs-cookies" => "xhs_cookies",
         _ => key,
     }
@@ -269,6 +277,103 @@ fn parse_twitter_input(value: &str) -> (Option<String>, Option<String>) {
     }
 }
 
+fn handle_xhs_cookies(value: &str, _config: &Config) {
+    use std::io::Write;
+
+    println!();
+    println!("Configuring XiaoHongShu cookies...");
+
+    // Try to find the xiaohongshu-mcp Docker container
+    match std::process::Command::new("docker")
+        .args(["ps", "--filter", "name=xiaohongshu-mcp", "--format", "{{.Names}}"])
+        .output()
+    {
+        Ok(output) if output.status.success() => {
+            let container = String::from_utf8_lossy(&output.stdout).trim().to_string();
+            if !container.is_empty() {
+                println!("  Found Docker container: {}", container);
+
+                let cookie_json = parse_xhs_cookie_input(value);
+                let tmp = std::env::temp_dir().join(format!("xhs_cookies_{}.json", std::process::id()));
+                if let Ok(mut f) = std::fs::File::create(&tmp) {
+                    let _ = f.write_all(cookie_json.as_bytes());
+                    #[cfg(unix)]
+                    {
+                        use std::os::unix::fs::PermissionsExt;
+                        let _ = f.set_permissions(std::fs::Permissions::from_mode(0o600));
+                    }
+                }
+
+                let cp_result = std::process::Command::new("docker")
+                    .args(["cp", &tmp.to_string_lossy(), &format!("{}:/app/cookies.json", container)])
+                    .output();
+                let _ = std::fs::remove_file(&tmp);
+
+                match cp_result {
+                    Ok(o) if o.status.success() => {
+                        println!("  Cookies injected into container {}", container);
+
+                        match std::process::Command::new("docker")
+                            .args(["restart", &container])
+                            .output()
+                        {
+                            Ok(o) if o.status.success() => {
+                                println!("  Container restarted, waiting for service...");
+                                std::thread::sleep(std::time::Duration::from_secs(3));
+                                if let Ok(v) = std::process::Command::new("mcporter")
+                                    .args(["call", "xiaohongshu.check_login_status()", "--timeout", "30000"])
+                                    .output()
+                                {
+                                    let out = String::from_utf8_lossy(&v.stdout);
+                                    println!("  {}", out.trim());
+                                }
+                            }
+                            Err(e) => eprintln!("  Container restart failed: {}", e),
+                            Ok(_) => eprintln!("  Container restart failed"),
+                        }
+                    }
+                    Err(e) => eprintln!("  docker cp failed: {}", e),
+                    Ok(_) => eprintln!("  docker cp failed"),
+                }
+                return;
+            }
+            println!("  No xiaohongshu-mcp container found.");
+        }
+        Ok(_) => println!("  Docker not available."),
+        Err(_) => println!("  Docker check skipped."),
+    }
+
+    println!("  Saving cookies to config file.");
+}
+
+fn parse_xhs_cookie_input(value: &str) -> String {
+    if value.trim().starts_with('{') || value.trim().starts_with('[') {
+        if serde_json::from_str::<serde_json::Value>(value).is_ok() {
+            return value.to_string();
+        }
+    }
+    if value.contains('=') && !value.trim().starts_with('{') {
+        let mut cookie_map = serde_json::Map::new();
+        for pair in value.split(';') {
+            let pair = pair.trim();
+            if let Some((k, v)) = pair.split_once('=') {
+                cookie_map.insert(
+                    k.trim().to_string(),
+                    serde_json::Value::String(v.trim().to_string()),
+                );
+            }
+        }
+        if !cookie_map.is_empty() {
+            let mut root = serde_json::Map::new();
+            root.insert("cookies".to_string(), serde_json::Value::Object(cookie_map));
+            if let Ok(json) = serde_json::to_string(&root) {
+                return json;
+            }
+        }
+    }
+    value.to_string()
+}
+
 fn cmd_uninstall(sub_m: &clap::ArgMatches) {
     let dry_run = sub_m.get_flag("dry-run");
     let keep_config = sub_m.get_flag("keep-config");
@@ -296,6 +401,22 @@ fn cmd_uninstall(sub_m: &clap::ArgMatches) {
     // Also uninstall skill
     if !keep_config {
         let _ = crate::skill::uninstall_skill();
+    }
+
+    // Clean up mcporter MCP entries (best-effort)
+    if !dry_run && !keep_config {
+        for entry in &["exa", "xiaohongshu"] {
+            if let Ok(output) = std::process::Command::new("mcporter")
+                .args(["config", "remove", entry])
+                .stdout(std::process::Stdio::null())
+                .stderr(std::process::Stdio::null())
+                .output()
+            {
+                if output.status.success() {
+                    println!("  ✅ Removed mcporter entry: {}", entry);
+                }
+            }
+        }
     }
 
     println!("✅ Uninstall complete.");
@@ -343,8 +464,50 @@ fn cmd_transcribe(sub_m: &clap::ArgMatches) {
 }
 
 fn cmd_check_update() {
-    println!("Agent Reach v{} is the latest version.", VERSION);
-    println!("Check https://github.com/Panniantong/Agent-Reach/releases for updates.");
+    let current = VERSION.trim_start_matches('v');
+    println!("Agent Reach v{}", VERSION);
+    println!("Checking for updates...");
+
+    let url = "https://api.github.com/repos/eric8810/agent-reach-rs/releases/latest";
+    match ureq::get(url)
+        .set("User-Agent", "agent-reach")
+        .set("Accept", "application/vnd.github+json")
+        .timeout(std::time::Duration::from_secs(10))
+        .call()
+    {
+        Ok(resp) => {
+            if let Ok(json) = resp.into_json::<serde_json::Value>() {
+                if let Some(tag) = json.get("tag_name").and_then(|v| v.as_str()) {
+                    let latest = tag.trim_start_matches('v');
+                    if latest != current {
+                        println!();
+                        println!("🔔 New version available: v{} (current: v{})", latest, current);
+                        if let Some(body) = json.get("body").and_then(|v| v.as_str()) {
+                            let preview: String = body.lines().take(15).collect::<Vec<_>>().join("\n");
+                            println!();
+                            println!("Release notes:");
+                            println!("{}", preview);
+                        }
+                        if let Some(html_url) = json.get("html_url").and_then(|v| v.as_str()) {
+                            println!();
+                            println!("Download: {}", html_url);
+                        }
+                    } else {
+                        println!("✅ You are running the latest version.");
+                    }
+                    return;
+                }
+            }
+            eprintln!("Warning: Could not parse GitHub release info.");
+        }
+        Err(ureq::Error::Status(403, _)) => {
+            eprintln!("Warning: GitHub API rate limit reached. Try again later.");
+        }
+        Err(e) => {
+            eprintln!("Warning: Could not check for updates: {}", e);
+        }
+    }
+    println!("Check https://github.com/eric8810/agent-reach-rs/releases for updates.");
 }
 
 fn cmd_watch() {
@@ -353,23 +516,131 @@ fn cmd_watch() {
     let ok_count = results.values().filter(|r| r.status == "ok").count();
     let total = results.len();
     println!("Agent Reach v{} — {}/{} channels active", VERSION, ok_count, total);
+
+    // Report broken/warning channels
+    let mut issues: Vec<String> = Vec::new();
+    for (_name, r) in &results {
+        if r.status == "error" {
+            issues.push(format!("  [X] {} — {}", r.name, r.message.lines().next().unwrap_or("unknown error")));
+        } else if r.status == "off" {
+            issues.push(format!("  -- {} — {}", r.name, r.message.lines().next().unwrap_or("not installed")));
+        }
+    }
+    if !issues.is_empty() {
+        println!();
+        println!("Channels needing attention:");
+        for issue in &issues {
+            println!("{}", issue);
+        }
+    }
+
+    // Also check for updates (best-effort)
+    cmd_check_update();
 }
 
 fn cmd_setup() {
+    use std::io::{self, Write};
+
     println!("Interactive configuration wizard");
     println!("{}", "≡".repeat(40));
     println!();
     println!("Agent Reach configuration wizard helps you set up:");
-    println!("  1. Network proxy (for accessing restricted platforms)");
-    println!("  2. API keys (Groq, OpenAI for transcription)");
-    println!("  3. Browser cookie extraction (Twitter, XiaoHongShu, etc.)");
+    println!("  1. Exa search (via mcporter, free)");
+    println!("  2. GitHub token (for private repos, rate limits)");
+    println!("  3. Reddit setup guide");
+    println!("  4. Groq API key (for audio transcription, free)");
     println!();
-    println!("Quick start:");
-    println!("  agent-reach configure proxy http://user:pass@ip:port");
-    println!("  agent-reach configure groq-key gsk_xxxxx");
-    println!("  agent-reach configure --from-browser chrome");
+
+    let mut config = Config::load().unwrap_or_default();
+    let stdin = io::stdin();
+    let mut input = String::new();
+
+    // Step 1: mcporter + Exa
+    println!("── Step 1/4: Exa search ──");
+    if crate::probe::command_exists("mcporter") {
+        // Check if Exa is already configured
+        if let Ok(output) = std::process::Command::new("mcporter")
+            .args(["config", "list"])
+            .output()
+        {
+            let out = String::from_utf8_lossy(&output.stdout);
+            if out.contains("exa") {
+                println!("✅ Exa search is already configured.");
+            } else {
+                print!("Exa search not configured. Configure now? [Y/n]: ");
+                io::stdout().flush().ok();
+                input.clear();
+                stdin.read_line(&mut input).ok();
+                if !input.trim().eq_ignore_ascii_case("n") {
+                    match std::process::Command::new("mcporter")
+                        .args(["config", "add", "exa", "https://mcp.exa.ai/mcp"])
+                        .output()
+                    {
+                        Ok(o) if o.status.success() => println!("✅ Exa search configured!"),
+                        _ => println!("  Could not configure Exa. Run: mcporter config add exa https://mcp.exa.ai/mcp"),
+                    }
+                }
+            }
+        }
+    } else {
+        println!("  mcporter not installed. Install with: npm install -g mcporter");
+        println!("  Then: mcporter config add exa https://mcp.exa.ai/mcp");
+    }
+
+    // Step 2: GitHub token
     println!();
-    println!("Then run: agent-reach doctor");
+    println!("── Step 2/4: GitHub token ──");
+    if config.get("github_token").map_or(false, |v| !v.is_empty()) {
+        println!("✅ GitHub token is already configured.");
+    } else {
+        println!("  A GitHub token unlocks private repos and higher rate limits.");
+        println!("  Get one at: https://github.com/settings/tokens (no special scopes needed)");
+        print!("  Enter GitHub token (or press Enter to skip): ");
+        io::stdout().flush().ok();
+        input.clear();
+        stdin.read_line(&mut input).ok();
+        let token = input.trim();
+        if !token.is_empty() {
+            config.set("github_token", token).ok();
+            println!("✅ GitHub token saved!");
+        }
+    }
+
+    // Step 3: Reddit
+    println!();
+    println!("── Step 3/4: Reddit ──");
+    if crate::probe::command_exists("rdt") {
+        println!("✅ rdt-cli detected. Run `rdt login` if not yet authenticated.");
+    } else {
+        println!("  Reddit requires rdt-cli (pipx install rdt-cli) and login cookie.");
+        println!("  See: https://raw.githubusercontent.com/Panniantong/agent-reach/main/agent_reach/guides/setup-reddit.md");
+    }
+
+    // Step 4: Groq API key
+    println!();
+    println!("── Step 4/4: Groq API key ──");
+    let has_groq = std::env::var("GROQ_API_KEY").map_or(false, |v| !v.is_empty())
+        || config.get("groq_api_key").map_or(false, |v| !v.is_empty());
+    if has_groq {
+        println!("✅ Groq API key is configured.");
+    } else {
+        println!("  Groq provides free Whisper API access for audio transcription.");
+        println!("  Sign up at: https://console.groq.com");
+        print!("  Enter Groq API key (or press Enter to skip): ");
+        io::stdout().flush().ok();
+        input.clear();
+        stdin.read_line(&mut input).ok();
+        let key = input.trim();
+        if !key.is_empty() {
+            config.set("groq_api_key", key).ok();
+            println!("✅ Groq API key saved!");
+        }
+    }
+
+    println!();
+    println!("{}", "≡".repeat(40));
+    println!("✅ Setup complete! Config saved to: {}", Config::config_file().display());
+    println!("Run `agent-reach doctor` to check all channels.");
 }
 
 fn cmd_format(sub_m: &clap::ArgMatches) {

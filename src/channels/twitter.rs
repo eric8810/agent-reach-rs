@@ -255,7 +255,7 @@ impl Channel for TwitterChannel {
 
         // Nothing installed at all
         CheckResult {
-            status: CheckStatus::Off,
+            status: CheckStatus::Warn,
             message: concat!(
                 "Twitter CLI 未安装。安装方式：\n",
                 "  pipx install twitter-cli\n",

@@ -10,6 +10,7 @@ pub mod config;
 pub mod cookie_extract;
 pub mod doctor;
 pub mod install;
+pub mod mcp_server;
 pub mod probe;
 pub mod skill;
 pub mod transcribe;
