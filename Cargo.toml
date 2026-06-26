@@ -27,6 +27,7 @@ dirs = "5"
 anyhow = "1"
 thiserror = "2"
 ureq = { version = "2", features = ["json", "cookies"] }
+uuid = { version = "1", features = ["v4"] }
 rss = "2"
 atom_syndication = "0.12"
 dotenvy = "0.15"

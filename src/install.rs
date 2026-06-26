@@ -84,6 +84,7 @@ fn kill_process(pid: u32) {
 }
 
 /// Run a command, silently (no output printed). For status checks.
+#[allow(dead_code)]
 fn run_cmd_silent(program: &str, args: &[&str], timeout_secs: u64) -> Option<String> {
     let child = Command::new(program)
         .args(args)
@@ -121,6 +122,7 @@ fn has_cmd(name: &str) -> bool {
 
 /// Try installing a Python package via pipx first, then uv tool install.
 /// Returns true on success.
+#[allow(dead_code)]
 fn install_python_package(package: &str, dry_run: bool) -> bool {
     for (tool, args) in [
         ("pipx", vec!["install", package]),
@@ -141,6 +143,7 @@ fn install_python_package(package: &str, dry_run: bool) -> bool {
 }
 
 /// Try installing a Python package from a git source via pipx first, then uv.
+#[allow(dead_code)]
 fn install_python_package_from(
     source: &str,
     binary: &str,
@@ -254,46 +257,13 @@ pub fn detect_environment() -> &'static str {
 
 // ── system dependencies ──────────────────────────────────────────────
 
-/// Install system-level dependencies: gh CLI, Node.js, undici, yt-dlp JS runtime config.
+/// Install system-level dependencies: Node.js, yt-dlp JS runtime config.
+///
+/// Note: gh CLI and undici are no longer required — channels now use
+/// native Rust backends (Twitter, Bilibili, Reddit, XiaoHongShu have their
+/// own HTTP-based API clients). mcporter is optional fallback.
 pub fn install_system_deps(safe_mode: bool, dry_run: bool) {
     println!("Checking system dependencies...");
-
-    // ── gh CLI ──
-    if has_cmd("gh") {
-        println!("  ✅ gh CLI already installed");
-    } else if safe_mode {
-        println!("  -- gh CLI not found");
-        println!("     Install: https://cli.github.com — or: apt install gh / brew install gh");
-    } else if dry_run {
-        println!("  [dry-run] Would install gh CLI");
-    } else {
-        println!("  Installing gh CLI...");
-        if cfg!(target_os = "linux") {
-            let installed = install_gh_linux();
-            if installed {
-                println!("  ✅ gh CLI installed");
-            } else {
-                println!("  [!] gh CLI install failed. Try: snap install gh, or download from https://github.com/cli/cli/releases");
-            }
-        } else if cfg!(target_os = "macos") {
-            if has_cmd("brew") {
-                match run_cmd("brew", &["install", "gh"], 120, false) {
-                    Ok(_) => {
-                        if has_cmd("gh") {
-                            println!("  ✅ gh CLI installed");
-                        } else {
-                            println!("  [!] gh CLI install failed. Try: brew install gh");
-                        }
-                    }
-                    Err(_) => println!("  [!] gh CLI install failed. Try: brew install gh"),
-                }
-            } else {
-                println!("  [!] gh CLI not found. Install: https://cli.github.com");
-            }
-        } else {
-            println!("  [!] gh CLI not found. Install: https://cli.github.com");
-        }
-    }
 
     // ── Node.js ──
     let has_node = has_cmd("node") && has_cmd("npm");
@@ -327,29 +297,6 @@ pub fn install_system_deps(safe_mode: bool, dry_run: bool) {
         } else {
             println!("  [!] Node.js not found. Install: https://nodejs.org");
         }
-    }
-
-    // ── undici (proxy support for Node.js fetch) ──
-    if has_cmd("npm") {
-        let npm_root = run_cmd_silent("npm", &["root", "-g"], 5);
-        let undici_ok = npm_root.as_ref().map_or(false, |root| {
-            PathBuf::from(root.trim()).join("undici").join("index.js").exists()
-        });
-        if undici_ok {
-            println!("  ✅ undici already installed (Node.js proxy support)");
-        } else if safe_mode {
-            println!("  -- undici not installed globally (optional)");
-            println!("     Install: npm install -g undici");
-        } else if dry_run {
-            println!("  [dry-run] Would install undici globally");
-        } else {
-            match run_cmd("npm", &["install", "-g", "undici"], 60, false) {
-                Ok(_) => println!("  ✅ undici installed (Node.js proxy support)"),
-                Err(_) => println!("  -- undici install failed (optional — may not work behind proxies)"),
-            }
-        }
-    } else if safe_mode {
-        println!("  -- npm not available (Node.js missing), can't check undici");
     }
 
     // ── yt-dlp JS runtime config ──
@@ -388,48 +335,10 @@ pub fn install_system_deps(safe_mode: bool, dry_run: bool) {
     if safe_mode {
         println!();
         println!("  To install missing dependencies manually:");
-        if !has_cmd("gh") {
-            println!("    gh CLI: https://cli.github.com — or: apt install gh / brew install gh");
-        }
         if !has_cmd("node") || !has_cmd("npm") {
             println!("    Node.js: https://nodejs.org — or: apt install nodejs npm / brew install node");
         }
     }
-}
-
-/// Install gh CLI on Linux via apt.
-fn install_gh_linux() -> bool {
-    // Detect architecture
-    let arch = run_cmd_silent("dpkg", &["--print-architecture"], 10)
-        .map(|s| s.trim().to_string())
-        .unwrap_or_else(|| "amd64".to_string());
-
-    let keyring = "/usr/share/keyrings/githubcli-archive-keyring.gpg";
-    let list_path = "/etc/apt/sources.list.d/github-cli.list";
-
-    // Download GPG key
-    if run_cmd("curl", &[
-        "-fsSL",
-        "https://cli.github.com/packages/githubcli-archive-keyring.gpg",
-        "-o", keyring,
-    ], 60, false).is_err() {
-        return false;
-    }
-
-    // Write apt source
-    let repo_line = format!(
-        "deb [arch={} signed-by={}] https://cli.github.com/packages stable main\n",
-        arch, keyring
-    );
-    if fs::write(list_path, repo_line).is_err() {
-        return false;
-    }
-
-    // Update and install
-    let _ = run_cmd("apt-get", &["update", "-qq"], 60, false);
-    let _ = run_cmd("apt-get", &["install", "-y", "-qq", "gh"], 60, false);
-
-    has_cmd("gh")
 }
 
 /// Install Node.js on Linux via NodeSource.
@@ -454,16 +363,18 @@ fn install_node_linux() -> bool {
     has_cmd("node")
 }
 
-// ── mcporter + Exa ───────────────────────────────────────────────────
+// ── mcporter + Exa (optional fallback) ───────────────────────────────
 
-/// Install mcporter and configure Exa search.
+/// Install mcporter and configure Exa search (optional).
+/// Mcporter is now optional — native backends (Twitter, Reddit, Bilibili,
+/// XiaoHongShu) use their own HTTP-based API clients.
 pub fn install_mcporter(safe_mode: bool, dry_run: bool) {
-    println!("Setting up mcporter (search backend)...");
+    println!("Setting up mcporter (search backend — optional)...");
 
     if has_cmd("mcporter") {
         println!("  ✅ mcporter already installed");
     } else if safe_mode {
-        println!("  -- mcporter not installed");
+        println!("  -- mcporter not installed (optional)");
         println!("     To install: npm install -g mcporter");
         println!("     Then configure Exa: mcporter config add exa https://mcp.exa.ai/mcp");
         return;
@@ -472,23 +383,20 @@ pub fn install_mcporter(safe_mode: bool, dry_run: bool) {
     } else {
         // Need npm/npx
         if !has_cmd("npm") && !has_cmd("npx") {
-            println!("  [!] mcporter requires Node.js. Install Node.js first:");
-            println!("     https://nodejs.org/ or: curl -fsSL https://fnm.vercel.app/install | bash");
+            println!("  -- mcporter requires Node.js (optional — native backends work without it).");
             return;
         }
-        // npm install -g mcporter, or try npx as fallback
         let cmd_result = if has_cmd("npm") {
             run_cmd("npm", &["install", "-g", "mcporter"], 120, false)
         } else {
-            // npx can't install globally — report missing
-            println!("  [!] npm not found, mcporter requires npm. Install Node.js first.");
+            println!("  -- npm not found, mcporter requires npm (optional).");
             return;
         };
 
         if cmd_result.is_ok() && has_cmd("mcporter") {
             println!("  ✅ mcporter installed");
         } else {
-            println!("  [X] mcporter install failed. Retry: npm install -g mcporter, or try: npx mcporter@latest list");
+            println!("  -- mcporter install skipped (optional)");
             return;
         }
     }
@@ -521,14 +429,15 @@ pub fn install_mcporter(safe_mode: bool, dry_run: bool) {
 // ── channel installers ───────────────────────────────────────────────
 
 /// Install optional channel tools for a named channel.
-/// Channels with no install step (xueqiu, linkedin) print a message.
+/// Channels with no install step (xueqiu, linkedin, and channels with
+/// native backends) print a message.
 pub fn install_channel(channel: &str, env: &str, safe_mode: bool, dry_run: bool) {
     match channel {
-        "twitter" => install_twitter_deps(safe_mode, dry_run),
+        "twitter" => install_native_channel_msg("Twitter", "Twitter API (native)", safe_mode),
         "xiaoyuzhou" => install_xiaoyuzhou_deps(safe_mode, dry_run),
         "xiaohongshu" => install_xhs_deps(env, safe_mode, dry_run),
-        "reddit" => install_reddit_deps(env, safe_mode, dry_run),
-        "bilibili" => install_bili_deps(safe_mode, dry_run),
+        "reddit" => install_native_channel_msg("Reddit", "native Rust backend", safe_mode),
+        "bilibili" => install_native_channel_msg("Bilibili", "native Rust backend", safe_mode),
         "opencli" => install_opencli_deps(safe_mode, dry_run),
         "xueqiu" => {
             if safe_mode || dry_run {
@@ -551,28 +460,12 @@ pub fn install_channel(channel: &str, env: &str, safe_mode: bool, dry_run: bool)
     }
 }
 
-/// Install twitter-cli (via pipx/uv).
-fn install_twitter_deps(safe_mode: bool, dry_run: bool) {
-    println!("Setting up Twitter (twitter-cli)...");
-    if has_cmd("twitter") {
-        println!("  ✅ twitter-cli already installed");
-        return;
-    }
+/// Print a message for channels that now have native Rust backends.
+fn install_native_channel_msg(channel_name: &str, backend: &str, safe_mode: bool) {
     if safe_mode {
-        println!("  -- twitter-cli not installed");
-        println!("     Install: pipx install twitter-cli  (or uv tool install twitter-cli)");
-        return;
-    }
-    if dry_run {
-        println!("  [dry-run] Would install twitter-cli");
-        return;
-    }
-    if install_python_package("twitter-cli", dry_run) {
-        if has_cmd("twitter") {
-            println!("  ✅ twitter-cli installed");
-        }
+        println!("  {}: {} — no external tools needed", channel_name, backend);
     } else {
-        println!("  [!] twitter-cli install failed. Run: pipx install twitter-cli");
+        println!("  ✅ {}: {} — no external tools needed", channel_name, backend);
     }
 }
 
@@ -634,7 +527,9 @@ fn install_xiaoyuzhou_deps(safe_mode: bool, dry_run: bool) {
     }
 }
 
-/// Set up XiaoHongShu. Desktop: OpenCLI. Server: xiaohongshu-mcp guide.
+/// Set up XiaoHongShu.
+/// Desktop: XHS API (native) via cookie config, with OpenCLI as fallback.
+/// Server: xiaohongshu-mcp guide.
 fn install_xhs_deps(env: &str, safe_mode: bool, dry_run: bool) {
     println!("Setting up XiaoHongShu...");
 
@@ -648,9 +543,31 @@ fn install_xhs_deps(env: &str, safe_mode: bool, dry_run: bool) {
         return;
     }
 
+    // Check if XHS cookies are already configured
+    let config = Config::load().unwrap_or_default();
+    let has_xhs_cookies = config.get("xhs_cookie").map_or(false, |v| !v.is_empty());
+    if has_xhs_cookies {
+        println!("  ✅ XHS cookies configured — XHS API (native) ready");
+    } else if safe_mode || dry_run {
+        println!("  -- XHS cookies not configured. Import with:");
+        println!("       agent-reach configure --from-browser chrome");
+    } else {
+        println!("  -- XHS cookies not configured. To set up:");
+        println!("       1. Log into xiaohongshu.com in Chrome");
+        println!("       2. Run: agent-reach configure --from-browser chrome");
+        println!("     Or manually: agent-reach configure xhs-cookies \"a1=...; web_session=...\"");
+    }
+
+    // OpenCLI as fallback (desktop only)
     install_opencli_deps(safe_mode, dry_run);
+
+    if safe_mode || dry_run {
+        // Don't check legacy xhs-cli in safe/dry mode
+        return;
+    }
     if has_cmd("xhs") {
-        println!("  ✅ 检测到存量 xhs-cli，将作为备选后端继续可用");
+        println!("  ✅ 检测到存量 xhs-cli，将作为末尾备选后端继续可用。");
+        println!("     推荐迁移到 XHS API (native)（零外部依赖）。");
     }
 }
 
@@ -711,73 +628,6 @@ fn install_opencli_deps(safe_mode: bool, dry_run: bool) {
     }
 }
 
-/// Set up Reddit. Desktop: OpenCLI, server: rdt-cli.
-fn install_reddit_deps(env: &str, safe_mode: bool, dry_run: bool) {
-    if env != "server" {
-        install_opencli_deps(safe_mode, dry_run);
-        println!("  Reddit 走 OpenCLI（浏览器里登录过 reddit.com 即可用）");
-        if has_cmd("rdt") {
-            println!("  ✅ 检测到存量 rdt-cli，将作为备选后端继续可用");
-        }
-        return;
-    }
-    install_rdt_cli(safe_mode, dry_run);
-}
-
-/// Install rdt-cli (pinned git source — PyPI lags upstream).
-///
-/// Pinned to the 0.4.2 state matching Python CLI.
-const RDT_GIT_SOURCE: &str = "git+https://github.com/public-clis/rdt-cli.git@5e4fb3720d5c174e976cd425ccc3b879d52cac66";
-
-fn install_rdt_cli(safe_mode: bool, dry_run: bool) {
-    println!("Setting up Reddit (rdt-cli)...");
-    if has_cmd("rdt") {
-        println!("  ✅ rdt-cli already installed");
-        return;
-    }
-    if safe_mode {
-        println!("  -- rdt-cli not installed");
-        println!("     Install: pipx install '{}'", RDT_GIT_SOURCE);
-        return;
-    }
-    if dry_run {
-        println!("  [dry-run] Would install rdt-cli from git");
-        return;
-    }
-    if install_python_package_from(RDT_GIT_SOURCE, "rdt", dry_run) {
-        if has_cmd("rdt") {
-            println!("  ✅ rdt-cli installed");
-        }
-    } else {
-        println!("  [!] rdt-cli install failed. Run: pipx install '{}'", RDT_GIT_SOURCE);
-    }
-}
-
-/// Install bili-cli for Bilibili.
-fn install_bili_deps(safe_mode: bool, dry_run: bool) {
-    println!("Setting up Bilibili (bili-cli)...");
-    if has_cmd("bili") {
-        println!("  ✅ bili-cli already installed");
-        return;
-    }
-    if safe_mode {
-        println!("  -- bili-cli not installed");
-        println!("     Install: pipx install bilibili-cli  (or uv tool install bilibili-cli)");
-        return;
-    }
-    if dry_run {
-        println!("  [dry-run] Would install bilibili-cli");
-        return;
-    }
-    if install_python_package("bilibili-cli", dry_run) {
-        if has_cmd("bili") {
-            println!("  ✅ bili-cli installed");
-        }
-    } else {
-        println!("  [!] bili-cli install failed. Run: pipx install bilibili-cli");
-    }
-}
-
 // ── skill installation ───────────────────────────────────────────────
 
 /// Install Agent Reach skill to agent directories.
@@ -796,10 +646,10 @@ pub fn install_skill() {
 
 /// Try to import cookies from browser for channels that need them.
 ///
-/// Channel set that needs cookies: twitter, xueqiu, bilibili.
+/// Channel set that needs cookies: twitter, xueqiu, bilibili, xiaohongshu.
 /// Tries Chrome first, then Firefox.
 pub fn auto_import_cookies(requested_channels: &HashSet<&str>) {
-    const COOKIE_CHANNELS: &[&str] = &["twitter", "xueqiu", "bilibili"];
+    const COOKIE_CHANNELS: &[&str] = &["twitter", "xueqiu", "bilibili", "xiaohongshu"];
     let needs_cookies = requested_channels.iter().any(|c| COOKIE_CHANNELS.contains(c));
     if !needs_cookies {
         return;
@@ -851,7 +701,7 @@ pub fn auto_import_cookies(requested_channels: &HashSet<&str>) {
 /// 1. Create tools directory
 /// 2. Save proxy if specified
 /// 3. Install system deps
-/// 4. Install mcporter + Exa
+/// 4. Install mcporter + Exa (optional)
 /// 5. Install optional channels
 /// 6. Auto-import cookies (if local + cookie channels)
 /// 7. Run doctor check
@@ -932,7 +782,7 @@ pub fn run_install(
     println!();
     install_system_deps(safe_mode, dry_run);
 
-    // ── mcporter + Exa ──
+    // ── mcporter + Exa (optional fallback) ──
     println!();
     install_mcporter(safe_mode, dry_run);
 
@@ -975,7 +825,7 @@ pub fn run_install(
     if env == "server" {
         println!();
         println!("Tip: 部分平台对服务器 IP 有风控。");
-        println!("   Reddit 必须登录态（rdt-cli + Cookie，见 doctor 提示），中国大陆网络还需代理。");
+        println!("   Reddit 必须登录态（Cookie 配置)，中国大陆网络还需代理。");
         println!("   保存代理供 Agent 使用：agent-reach configure proxy http://user:pass@ip:port");
         println!("   Cheap option: https://www.webshare.io ($1/month)");
     }

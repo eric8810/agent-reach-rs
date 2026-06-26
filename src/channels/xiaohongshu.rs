@@ -1,12 +1,15 @@
-//! XiaoHongShu (小红书) — multi-backend: OpenCLI / xiaohongshu-mcp / xhs-cli.
+//! XiaoHongShu (小红书) — multi-backend: XHS API (native) / OpenCLI /
+//! xiaohongshu-mcp / xhs-cli.
 //!
-//! Backend order encodes the recommendation, and probing order makes the
-//! environment split automatic: OpenCLI needs a desktop Chrome so it simply
-//! never probes alive on a server, where xiaohongshu-mcp (self-contained
-//! headless browser) takes over. xhs-cli (upstream unmaintained since
-//! 2026-03) keeps working for existing installs as the last candidate.
+//! Backend order encodes the recommendation:
+//! 1. XHS API (native) — zero external deps, calls edith API directly
+//! 2. OpenCLI — cross-platform via Chrome browser session
+//! 3. xiaohongshu-mcp — self-contained headless browser, server-friendly
+//! 4. xhs-cli — legacy CLI (upstream unmaintained since 2026-03)
 
-use serde_json::Value;
+use serde_json::{json, Value};
+use std::collections::HashMap;
+use std::time::Duration;
 use url::Url;
 
 use crate::backends::{opencli_status, OpenCLIStatus};
@@ -14,10 +17,25 @@ use crate::channels::base::{Channel, CheckResult, CheckStatus};
 use crate::config::Config;
 use crate::probe::{probe_command, ProbeStatus};
 
+// ── API constants ───────────────────────────────────────────────────────
+
+/// XiaoHongShu web API base.
+const XHS_API_BASE: &str = "https://edith.xiaohongshu.com";
+/// Search endpoint.
+const XHS_SEARCH_URL: &str = "/api/sns/web/v1/search/notes";
+/// Note detail (feed) endpoint.
+const XHS_FEED_URL: &str = "/api/sns/web/v1/feed";
+
 const MCP_ENDPOINT: &str = "http://localhost:18060/mcp";
 const MCP_INSTALL_URL: &str = "https://github.com/xpzouying/xiaohongshu-mcp";
 
-/// XiaoHongShu channel — multi-backend with OpenCLI, xiaohongshu-mcp, and xhs-cli.
+/// Lightweight probe keyword.
+const PROBE_KEYWORD: &str = "test";
+
+// ── struct ──────────────────────────────────────────────────────────────
+
+/// XiaoHongShu channel — multi-backend with native API, OpenCLI,
+/// xiaohongshu-mcp, and xhs-cli.
 pub struct XiaoHongShuChannel {
     pub active_backend: Option<String>,
 }
@@ -29,7 +47,185 @@ impl XiaoHongShuChannel {
         }
     }
 
-    // ── backend probes ──────────────────────────────────────────────
+    // ── cookie parsing ───────────────────────────────────────────────
+
+    /// Parse the `xhs_cookie` config value into a map of name→value.
+    fn parse_cookies(config: Option<&Config>) -> Option<(String, HashMap<String, String>)> {
+        let raw = config.and_then(|c| c.get("xhs_cookie"))?;
+        if raw.is_empty() {
+            return None;
+        }
+        let mut map = HashMap::new();
+        for part in raw.split(';') {
+            let part = part.trim();
+            if let Some((k, v)) = part.split_once('=') {
+                map.insert(k.trim().to_string(), v.trim().to_string());
+            }
+        }
+        if map.is_empty() {
+            None
+        } else {
+            Some((raw, map))
+        }
+    }
+
+    /// Extract xs and xt tokens from cookie map.
+    /// Looks for common cookie names: x-user-xs / x-user-xt, or xs / xt.
+    fn extract_xs_xt(cookies: &HashMap<String, String>) -> (Option<String>, Option<String>) {
+        let xs = cookies
+            .get("x-user-xs")
+            .or_else(|| cookies.get("xs"))
+            .cloned();
+        let xt = cookies
+            .get("x-user-xt")
+            .or_else(|| cookies.get("xt"))
+            .or_else(|| cookies.get("web_session"))
+            .cloned();
+        (xs, xt)
+    }
+
+    // ── HTTP helpers ──────────────────────────────────────────────────
+
+    /// Build a ureq request to the XHS API with cookie + xs/xt headers.
+    fn xhs_request(
+        method: &str,
+        path: &str,
+        cookie_str: &str,
+        xs: Option<&str>,
+        xt: Option<&str>,
+    ) -> ureq::Request {
+        let url = format!("{}{}", XHS_API_BASE, path);
+        let agent = ureq::AgentBuilder::new().build();
+        let mut req = match method {
+            "POST" => agent.post(&url),
+            _ => agent.get(&url),
+        };
+        req = req
+            .set("Cookie", cookie_str)
+            .set("User-Agent", "agent-reach/1.5")
+            .set("Content-Type", "application/json;charset=UTF-8")
+            .set("Origin", "https://www.xiaohongshu.com")
+            .set("Referer", "https://www.xiaohongshu.com/")
+            .timeout(Duration::from_secs(30));
+        if let Some(v) = xs {
+            req = req.set("X-S", v);
+        }
+        if let Some(v) = xt {
+            req = req.set("X-T", v);
+        }
+        req
+    }
+
+    /// Run an XHS API request, handle errors, return parsed JSON.
+    fn xhs_call(
+        req: ureq::Request,
+        body: Option<Value>,
+    ) -> Result<Value, String> {
+        let resp = match body {
+            Some(b) => req.send_json(b),
+            None => req.call(),
+        };
+
+        match resp {
+            Ok(r) => {
+                let body_str = r
+                    .into_string()
+                    .map_err(|e| format!("XHS API read error: {}", e))?;
+                serde_json::from_str(&body_str)
+                    .map_err(|e| format!("XHS API JSON parse error: {}", e))
+            }
+            Err(ureq::Error::Status(code, r)) => {
+                let body_str = r
+                    .into_string()
+                    .unwrap_or_else(|_| "<unreadable>".to_string());
+                Err(format!(
+                    "XHS API HTTP {}: {}",
+                    code,
+                    body_str.chars().take(500).collect::<String>()
+                ))
+            }
+            Err(ureq::Error::Transport(e)) => {
+                Err(format!("XHS API transport error: {}", e))
+            }
+        }
+    }
+
+    // ── native API: data-fetching methods ─────────────────────────────
+
+    /// Search notes on XiaoHongShu.
+    pub fn search_notes(
+        keyword: &str,
+        page: usize,
+        page_size: usize,
+        cookie_str: &str,
+        xs: Option<&str>,
+        xt: Option<&str>,
+    ) -> Result<Value, String> {
+        let search_id = uuid::Uuid::new_v4().to_string();
+        let body = json!({
+            "keyword": keyword,
+            "page": page,
+            "page_size": page_size,
+            "search_id": search_id,
+            "sort": "general",
+            "note_type": 0
+        });
+
+        let req = Self::xhs_request("POST", XHS_SEARCH_URL, cookie_str, xs, xt);
+        Self::xhs_call(req, Some(body))
+    }
+
+    /// Get a single note detail by note_id.
+    pub fn get_note_detail(
+        note_id: &str,
+        cookie_str: &str,
+        xs: Option<&str>,
+        xt: Option<&str>,
+    ) -> Result<Value, String> {
+        let path = format!("{}?source_note_id={}", XHS_FEED_URL, note_id);
+        let req = Self::xhs_request("GET", &path, cookie_str, xs, xt);
+        Self::xhs_call(req, None)
+    }
+
+    // ── native API: health check ──────────────────────────────────────
+
+    /// Check the native XHS API backend.
+    fn check_native_api(
+        &self,
+        config: Option<&Config>,
+    ) -> Option<(String, String)> {
+        let (cookie_str, cookies) = Self::parse_cookies(config)?;
+        let (xs, xt) = Self::extract_xs_xt(&cookies);
+
+        // Try a lightweight search probe
+        match Self::search_notes(
+            PROBE_KEYWORD,
+            1,
+            1,
+            &cookie_str,
+            xs.as_deref(),
+            xt.as_deref(),
+        ) {
+            Ok(_resp) => {
+                Some((
+                    "ok".to_string(),
+                    "XHS API (native) 可用（edith API，零外部依赖，已登录）".to_string(),
+                ))
+            }
+            Err(e) => {
+                Some((
+                    "warn".to_string(),
+                    format!(
+                        "XHS API (native) 请求失败：{}\n\
+                         Cookie 可能已过期或缺失，需要重新从浏览器提取。",
+                        e
+                    ),
+                ))
+            }
+        }
+    }
+
+    // ── OpenCLI probe ─────────────────────────────────────────────────
 
     /// OpenCLI candidate. None = not installed.
     fn check_opencli(&self) -> Option<(String, String)> {
@@ -110,13 +306,12 @@ impl XiaoHongShuChannel {
             ));
         }
 
-        // Process is alive (ran successfully or non-zero exit) — classify by output
         if probe.ok() && probe.output.contains("ok: true") {
             return Some((
                 "ok".to_string(),
                 concat!(
                     "xhs-cli 可用（搜索、阅读、评论、热门；上游 2026-03 起停更，",
-                    "桌面用户建议迁移到 OpenCLI）"
+                    "建议迁移到 XHS API (native) 或 OpenCLI）"
                 )
                 .to_string(),
             ));
@@ -149,7 +344,12 @@ impl Channel for XiaoHongShuChannel {
     }
 
     fn backends(&self) -> &[&str] {
-        &["OpenCLI", "xiaohongshu-mcp", "xhs-cli (xiaohongshu-cli)"]
+        &[
+            "XHS API (native)",
+            "OpenCLI",
+            "xiaohongshu-mcp",
+            "xhs-cli (xiaohongshu-cli)",
+        ]
     }
 
     fn tier(&self) -> u8 {
@@ -179,13 +379,28 @@ impl Channel for XiaoHongShuChannel {
         let mut findings: Vec<(String, String, String)> = Vec::new(); // (backend, status, message)
 
         for backend in self.ordered_backends(config) {
-            let result = if backend == "OpenCLI" {
+            let result = if backend == "XHS API (native)" {
+                // XHS API (native) always reports — it needs cookies to work
+                match Self::parse_cookies(config) {
+                    Some(_) => self.check_native_api(config),
+                    None => Some((
+                        "warn".to_string(),
+                        concat!(
+                            "XHS API (native) 未配置 Cookie。\n",
+                            "  从浏览器提取：agent-reach configure xhs-cookies <cookie-string>\n",
+                            "  或：agent-reach configure --from-browser chrome"
+                        )
+                        .to_string(),
+                    )),
+                }
+            } else if backend == "OpenCLI" {
                 self.check_opencli()
             } else if backend == "xiaohongshu-mcp" {
                 self.check_mcp()
             } else {
                 self.check_xhs_cli()
             };
+
             if let Some((status, msg)) = result {
                 findings.push((backend, status, msg));
             }
@@ -221,8 +436,8 @@ impl Channel for XiaoHongShuChannel {
             status: CheckStatus::Off,
             message: format!(
                 "未安装任何小红书后端。推荐：\n\
-                  桌面：agent-reach install --channels opencli\n\
-                 \x20      （复用 Chrome 登录态，刷过小红书即零配置可用）\n\
+                   桌面：agent-reach configure --from-browser chrome\n\
+                 \x20      （自动提取 Cookie，XHS API (native) 零外部依赖）\n\
                   服务器：xiaohongshu-mcp（自带无头浏览器+扫码登录）：{}",
                 MCP_INSTALL_URL
             ),
@@ -239,13 +454,10 @@ impl Channel for XiaoHongShuChannel {
 /// we only care that the service is up. Proxies are bypassed explicitly:
 /// localhost must never be routed through HTTP_PROXY.
 fn mcp_service_reachable() -> bool {
-    // Build an agent that explicitly bypasses proxies for localhost.
-    // ureq's global agent may respect HTTP_PROXY; we construct a fresh
-    // agent with no proxy configured.
     let agent = ureq::AgentBuilder::new().build();
     match agent.get(MCP_ENDPOINT).call() {
         Ok(_) => true,
-        Err(ureq::Error::Status(_, _)) => true, // 405/404 etc. — service is alive
+        Err(ureq::Error::Status(_, _)) => true,
         Err(_) => false,
     }
 }
@@ -461,6 +673,17 @@ mod tests {
     }
 
     #[test]
+    fn test_backends_order() {
+        let ch = XiaoHongShuChannel::new();
+        let backends = ch.backends();
+        assert_eq!(backends.len(), 4);
+        assert_eq!(backends[0], "XHS API (native)");
+        assert_eq!(backends[1], "OpenCLI");
+        assert_eq!(backends[2], "xiaohongshu-mcp");
+        assert_eq!(backends[3], "xhs-cli (xiaohongshu-cli)");
+    }
+
+    #[test]
     fn test_format_single_note() {
         let data = serde_json::json!({
             "id": "123",
@@ -601,5 +824,27 @@ mod tests {
             obj.get("title").unwrap().as_str().unwrap(),
             "Inner title"
         );
+    }
+
+    #[test]
+    fn test_extract_xs_xt() {
+        let mut cookies = std::collections::HashMap::new();
+        cookies.insert("a1".to_string(), "abc123".to_string());
+        cookies.insert("web_session".to_string(), "ws456".to_string());
+        cookies.insert("x-user-xs".to_string(), "xs789".to_string());
+        cookies.insert("x-user-xt".to_string(), "xt012".to_string());
+
+        let (xs, xt) = XiaoHongShuChannel::extract_xs_xt(&cookies);
+        assert_eq!(xs.unwrap(), "xs789");
+        assert_eq!(xt.unwrap(), "xt012");
+    }
+
+    #[test]
+    fn test_extract_xs_xt_fallback() {
+        let mut cookies = std::collections::HashMap::new();
+        cookies.insert("web_session".to_string(), "ws456".to_string());
+        // No xs/xt — xt should fall back to web_session
+        let (_xs, xt) = XiaoHongShuChannel::extract_xs_xt(&cookies);
+        assert_eq!(xt.unwrap(), "ws456");
     }
 }
