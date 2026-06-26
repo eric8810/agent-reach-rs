@@ -119,8 +119,6 @@ fn cmd_doctor(json_output: bool) {
     } else {
         println!("{}", doctor::format_report(&results));
     }
-    // Auto-install agent skill if not already present (fixes #154)
-    let _ = crate::skill::install_skill();
 }
 
 fn cmd_install(sub_m: &clap::ArgMatches) {
