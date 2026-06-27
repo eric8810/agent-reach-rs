@@ -9,6 +9,7 @@ pub mod cli;
 pub mod config;
 pub mod cookie_extract;
 pub mod doctor;
+pub mod ffmpeg_dl;
 pub mod install;
 pub mod mcp_server;
 pub mod probe;

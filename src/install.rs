@@ -332,11 +332,29 @@ pub fn install_system_deps(safe_mode: bool, dry_run: bool) {
         }
     }
 
+    // ── ffmpeg (auto-download if missing) ──
+    if crate::ffmpeg_dl::find_ffmpeg().is_some() {
+        println!("  ✅ ffmpeg available");
+    } else if safe_mode {
+        println!("  -- ffmpeg not found");
+        println!("     Run: agent-reach install --env=auto  (auto-downloads static binary)");
+    } else if dry_run {
+        println!("  [dry-run] Would download ffmpeg static binary (~30MB)");
+    } else {
+        match crate::ffmpeg_dl::ensure_ffmpeg(false) {
+            Ok(path) => println!("  ✅ ffmpeg installed: {}", path.display()),
+            Err(e) => println!("  [!] ffmpeg download failed: {}", e),
+        }
+    }
+
     if safe_mode {
         println!();
         println!("  To install missing dependencies manually:");
         if !has_cmd("node") || !has_cmd("npm") {
             println!("    Node.js: https://nodejs.org — or: apt install nodejs npm / brew install node");
+        }
+        if crate::ffmpeg_dl::find_ffmpeg().is_none() {
+            println!("    ffmpeg: auto-downloaded by 'agent-reach install'");
         }
     }
 }

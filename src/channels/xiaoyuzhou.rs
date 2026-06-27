@@ -66,18 +66,11 @@ impl XiaoyuzhouChannel {
 
     /// Probe the full groq-whisper pipeline (ffmpeg + transcribe script + API key).
     fn check_groq_whisper(config: Option<&Config>) -> Option<(CheckStatus, String)> {
-        // Check ffmpeg
-        let probe = probe_command("ffmpeg", &["-version"], 10, 0, Some("ffmpeg"));
-        if probe.status == ProbeStatus::Missing {
+        // Check ffmpeg (auto-download if needed)
+        if crate::ffmpeg_dl::find_ffmpeg().is_none() && crate::ffmpeg_dl::ensure_ffmpeg(false).is_err() {
             return Some((
                 CheckStatus::Off,
-                "需要 ffmpeg（音频转码和切片）。安装：\n  Ubuntu/Debian: apt install -y ffmpeg\n  macOS: brew install ffmpeg".to_string(),
-            ));
-        }
-        if !probe.ok() {
-            return Some((
-                CheckStatus::Error,
-                "ffmpeg 无法执行，重装：brew install ffmpeg（macOS）/ apt install ffmpeg（Linux）".to_string(),
+                "需要 ffmpeg（音频转码和切片）。运行 agent-reach install 自动下载。".to_string(),
             ));
         }
 
@@ -121,20 +114,11 @@ impl XiaoyuzhouChannel {
 
     /// Probe ffmpeg presence only (secondary concern for audio processing).
     fn check_ffmpeg() -> Option<(CheckStatus, String)> {
-        let probe = probe_command("ffmpeg", &["-version"], 10, 0, Some("ffmpeg"));
-        if probe.status == ProbeStatus::Missing {
-            return None;
+        if crate::ffmpeg_dl::find_ffmpeg().is_some() || crate::ffmpeg_dl::ensure_ffmpeg(false).is_ok() {
+            Some((CheckStatus::Ok, "ffmpeg 可用（音频转码和切片）".to_string()))
+        } else {
+            Some((CheckStatus::Off, "ffmpeg 未安装。运行 agent-reach install 自动下载。".to_string()))
         }
-        if !probe.ok() {
-            return Some((
-                CheckStatus::Error,
-                "ffmpeg 无法执行，重装：brew install ffmpeg（macOS）/ apt install ffmpeg（Linux）".to_string(),
-            ));
-        }
-        Some((
-            CheckStatus::Ok,
-            "ffmpeg 可用（音频转码和切片）".to_string(),
-        ))
     }
 }
 

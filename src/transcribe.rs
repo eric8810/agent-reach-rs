@@ -70,10 +70,14 @@ fn provider_order(provider: &str) -> Result<Vec<&'static str>, String> {
 // Shell helpers
 // ---------------------------------------------------------------------------
 
-/// Check that a required binary exists on PATH.
+/// Check that a required binary exists, auto-downloading ffmpeg if needed.
 fn require_binary(name: &str) -> Result<(), String> {
-    which::which(name).map_err(|_| format!("{} not found in PATH", name))?;
-    Ok(())
+    if name == "ffmpeg" {
+        crate::ffmpeg_dl::ensure_ffmpeg(false).map(|_| ()).map_err(|e| e)
+    } else {
+        which::which(name).map_err(|_| format!("{} not found in PATH", name))?;
+        Ok(())
+    }
 }
 
 /// Run a subprocess, capture output, enforce a timeout, return on success or
