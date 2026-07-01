@@ -1,0 +1,3197 @@
+﻿[
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "Using Multi-agent Orchestration in Microsoft Copilot Studio (Parent Child Copilot Agents Tutorial)",
+        "round":  2,
+        "video_id":  "WKKdBC2zM3k"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "Building AI Agents for Real-World Problems \u0026 Workflows",
+        "channel":  "",
+        "video_id":  "4Vg2aVtrX8k",
+        "views":  ""
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "How to Build Reliable AI Agents (without the hype)",
+        "round":  2,
+        "video_id":  "T1Lowy1mnEg"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "Why AI Agents are either the best or worst thing we’ve ever built",
+        "channel":  "",
+        "video_id":  "WnzR5aOElvw",
+        "views":  ""
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "Agentic Reasoning: New Framework for LLM Agents",
+        "round":  3,
+        "video_id":  "_IzbnGKEZ1o"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "Scrape Any Website for FREE Using DeepSeek \u0026 Crawl4AI",
+        "round":  3,
+        "video_id":  "Osl4NgAXvRk"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "What Is Agentic AI? AI Agents and the Revolution That Changes Everything",
+        "channel":  "",
+        "video_id":  "fOfy-OsKWf4",
+        "views":  ""
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Build Your First Autonomous Agent with Copilot Studio",
+        "channel":  "",
+        "video_id":  "ZE95URGcT7o",
+        "views":  ""
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "I Built My Own Personal AI Assistant Using Gemini 3 + n8n (Free Templates Included)",
+        "channel":  "",
+        "video_id":  "xqT2FIBT1xU",
+        "views":  ""
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "AI Agents vs. LLMs: Choosing the Right Tool for AI Tasks",
+        "channel":  "",
+        "video_id":  "I9z-nrk9cw0",
+        "views":  ""
+    },
+    {
+        "query":  "agent swarm collective intelligence",
+        "title":  "Agent Swarm - Legacy or Hidden Gem of Agent Design",
+        "round":  3,
+        "video_id":  "jffNQ0t8X8w"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Steve Jobs on Consulting",
+        "round":  2,
+        "video_id":  "-c4CNB80SRc"
+    },
+    {
+        "query":  "agent tool integration ecosystem",
+        "title":  "Google Cloud Live: Supercharge your AI agents: Inside the new ADK integrations ecosystem",
+        "round":  2,
+        "video_id":  "nId1rrAIEx4"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "How AI can heal healthcare | Edmund Jackson | TEDxNashville",
+        "round":  2,
+        "video_id":  "7ZsyYCZB3Nw"
+    },
+    {
+        "query":  "AI agent assistant workflow automation",
+        "title":  "From Zero to Your First Agentic AI Workflow in 26 Minutes (Claude Code)",
+        "round":  2,
+        "video_id":  "tDGiWn0flK8"
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "These 3 AI Stocks Insiders Are Selling Right Now — Here\u0027s Why | Warren Buffett",
+        "round":  3,
+        "video_id":  "aeM6hr-60Mc"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "LangGraph: Planning Agents",
+        "round":  3,
+        "video_id":  "uRya4zRrRx4"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "Introducing OASIS: Open Agent Social Interaction Simulations with One Million Agents",
+        "round":  2,
+        "video_id":  "wjLHrdZ1Smk"
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Why AI Agents Need A Human in the Loop Now",
+        "round":  3,
+        "video_id":  "cmEJ-5zYKHA"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "Top 7 AI Examples In Healthcare - The Medical Futurist",
+        "round":  3,
+        "video_id":  "mkiDXTS6-mU"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Hermes Architecture EXPLAINED: Memory, Context \u0026 Gateways",
+        "round":  3,
+        "video_id":  "n32qq7Kwzh0"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "AI Agents Explained: A Comprehensive Guide for Beginners",
+        "channel":  "",
+        "video_id":  "hLJTcVHW8_I",
+        "views":  ""
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Security, privacy, and governance considerations for using AI at scale",
+        "round":  2,
+        "video_id":  "l6ou6hVUJ3k"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Stanford Webinar - Agentic AI: A Progression of Language Model Usage",
+        "channel":  "",
+        "video_id":  "kJLiOGle3Lw",
+        "views":  ""
+    },
+    {
+        "query":  "agent tool",
+        "title":  "PI Architecture EXPLAINED | Agent Loop, Tools, TUI and More",
+        "channel":  "",
+        "video_id":  "gTeujlv8qK0",
+        "views":  ""
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop",
+        "channel":  "",
+        "video_id":  "L7FF8Zgab3M",
+        "views":  ""
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Build No-Code Agents With Open Agent Platform",
+        "channel":  "",
+        "video_id":  "pGkEtO6xtYE",
+        "views":  ""
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "Web Scraping, and how it gives AI Agents 100x more power",
+        "round":  3,
+        "video_id":  "wk8joeKtXBA"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Make your Own Agents in Copilot | Complete Tutorial",
+        "round":  2,
+        "video_id":  "UTRTZMwElWg"
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "You Can Learn AI Agent Harness \u0026 Loop Engineering In 19 Min | LLM Ops, Eval, Tracing, RAG",
+        "channel":  "",
+        "video_id":  "GrNbuWWJYiI",
+        "views":  ""
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "This AI Agent Does My Day Trading (Makes Me $500/Day)",
+        "round":  3,
+        "video_id":  "k396eQjwV9w"
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Agent Framework: Building Blocks for the Next Generation of AI Agents",
+        "channel":  "",
+        "video_id":  "AAgdMhftj8w",
+        "views":  ""
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "LLM, AI Agent Basic Concepts in 7 Minutes - For Beginners",
+        "channel":  "",
+        "video_id":  "QtYEPYntfL4",
+        "views":  ""
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "LangGraph Crash Course - Agent Workflows in Python",
+        "round":  3,
+        "video_id":  "uWLJAtMOVT0"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "Don\u0027t learn AI Agents without Learning these Fundamentals",
+        "channel":  "",
+        "video_id":  "ZaPbP9DwBOE",
+        "views":  ""
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "07 Agent Framework - Workflow - Human in the Loop with CosmosDB",
+        "round":  3,
+        "video_id":  "R4QrbLdex6Y"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "AI Agent Full Tutorial for Beginners 2026: How to Build AI Agents in Minutes",
+        "channel":  "",
+        "video_id":  "C05XDMGaAn8",
+        "views":  ""
+    },
+    {
+        "query":  "AI agent",
+        "title":  "How To Build Your First AI Agent (automate anything)",
+        "channel":  "",
+        "video_id":  "m7oLuUo7DBo",
+        "views":  ""
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Cross-platform collaborative coding: From web apps to AI agents",
+        "round":  2,
+        "video_id":  "DG06sVsM1XE"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "n8n Just Made Multi Agent AI Way Easier: New AI Agent Tool",
+        "channel":  "",
+        "video_id":  "lW5xEm7iSXk",
+        "views":  ""
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "Am I going to jail for web scraping?",
+        "round":  3,
+        "video_id":  "8GhFmQPZAlo"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Multi AI Agent Systems: When One AI Brain Isn’t Enough",
+        "channel":  "",
+        "video_id":  "kYkZI3oj2W4",
+        "views":  ""
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "Agentic Framework LangGraph explained in 8 minutes | Beginners Guide",
+        "round":  3,
+        "video_id":  "1Q_MDOWaljk"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "New AI Agent Tool (Step By Step Guide 2026)",
+        "channel":  "",
+        "video_id":  "mFYrg4kooQ8",
+        "views":  ""
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "The End of Infrastructure-as-Code: AI Changes Everything... Maybe...",
+        "round":  3,
+        "video_id":  "xwDQh3gAec0"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "The EASIEST Way to Build a Copilot Agent (NEW Agent Builder Tutorial)",
+        "round":  2,
+        "video_id":  "9_Dw9qcjLgA"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Build agents with Agent Platform",
+        "channel":  "",
+        "video_id":  "eIBrvOUbufY",
+        "views":  ""
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "4. How to Control What Your AI Agent Does Next - Human-in-the-Loop Explained 🤖",
+        "round":  3,
+        "video_id":  "cge2Yn_MKcc"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "Zero To Your First AI Agent In 26 Minutes (no code)",
+        "channel":  "",
+        "video_id":  "DV0Ln7HRyJQ",
+        "views":  ""
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "Dexter 2.0: Open-Source AI Agent for Stock \u0026 Financial Research",
+        "round":  3,
+        "video_id":  "s00uh96PhGw"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Gemini Enterprise Agent Platform: Adding memory to AI agents",
+        "channel":  "",
+        "video_id":  "5m9ppmJuJHk",
+        "views":  ""
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "Forget DevOps – Become a Cloud AI Engineer instead",
+        "round":  3,
+        "video_id":  "A7rBcv23krc"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "How to Use Microsoft Copilot Studio (Step-by-Step Tutorial)",
+        "round":  2,
+        "video_id":  "dX9MJM5EokE"
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Getting Started with Microsoft Agent Framework: Build Practical AI Agents",
+        "channel":  "",
+        "video_id":  "JngWQLylFX8",
+        "views":  ""
+    },
+    {
+        "query":  "agent swarm collective intelligence",
+        "title":  "Agentic Patterns : Multi-Agent Swarms | The Debate Pattern",
+        "round":  3,
+        "video_id":  "QdhR8h-H7w4"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  ".NET AI Community Standup: Squad: AI agent teams for any project",
+        "round":  2,
+        "video_id":  "nHZC-tl_ado"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "Crew AI Tutorial | Build Multi AI Agents",
+        "round":  3,
+        "video_id":  "K2UAE1OlC8s"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "MCP In 26 Minutes (Model Context Protocol)",
+        "round":  3,
+        "video_id":  "kOhLoixrJXo"
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Human Agent Collaboration in Data Science and AI,  Data Science Festival, May 2025, Jason Hillary",
+        "round":  2,
+        "video_id":  "rStFt1lJjwM"
+    },
+    {
+        "query":  "autonomous agent real world example",
+        "title":  "What is an Autonomous Agent in AI? | How AI Thinks \u0026 Acts on Its Own!",
+        "round":  2,
+        "video_id":  "98cRLHTMGUc"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "Best FREE AI Agent Tools That Actually Work in 2026 (I Tried All)",
+        "channel":  "",
+        "video_id":  "2GOfWK5M3fg",
+        "views":  ""
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "How to Build an AI Agent with Microsoft 365 Copilot (No Code Step-by-Step Guide)",
+        "round":  2,
+        "video_id":  "Iz3ul6hSeTs"
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Building an AI Agent Governance Framework: 5 Essential Pillars",
+        "round":  2,
+        "video_id":  "5hK7pQsvpy0"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "What is Gemini Enterprise Agent Platform?",
+        "channel":  "",
+        "video_id":  "j8qW5poBkEU",
+        "views":  ""
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "you need to learn MCP RIGHT NOW!! (Model Context Protocol)",
+        "round":  3,
+        "video_id":  "GuTcle5edjk"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "Rogue AI Agents: How AI Observability Builds Autonomous Trust",
+        "round":  3,
+        "video_id":  "UjQBgwTcvng"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "How to Build AI Agents Better than 99% of People",
+        "channel":  "",
+        "video_id":  "9AsFlLk5-S8",
+        "views":  ""
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "Agentic AI in Healthcare - One Minute Challenge",
+        "round":  3,
+        "video_id":  "QGoDOEvPnec"
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "The Pi Coding Agent: The ONLY REAL Claude Code COMPETITOR",
+        "round":  3,
+        "video_id":  "f8cfH5XX-XU"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Google Gemini Enterprise Agent Platform Explained | The Evolution of Vertex AI",
+        "channel":  "",
+        "video_id":  "7NN4oyDiMv8",
+        "views":  ""
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "AI DOCTORS DIAGNOSE 93% Accurately – Is This the End of Human Healthcare?”",
+        "round":  3,
+        "video_id":  "CNonSdvZ-8Q"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "L8 Principal\u0027s Agentic Engineering Workflow",
+        "channel":  "",
+        "video_id":  "iQyg-KypKAA",
+        "views":  ""
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "What is Leafy Green Agency?",
+        "round":  2,
+        "video_id":  "FH8h7nuIFiY"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "How Monitoring Calls Improves Agent Performance",
+        "round":  2,
+        "video_id":  "-salbKiWWiY"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "Local AI Agents In 26 Minutes",
+        "channel":  "",
+        "video_id":  "M-NTwkM3VwM",
+        "views":  ""
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "Claude Code: AI Agent for DevOps, SRE, and Platform Engineering",
+        "round":  3,
+        "video_id":  "h-6LP133o6w"
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "I Built an AI Trading System With Claude + TradingView",
+        "round":  3,
+        "video_id":  "IqvnryFzZD4"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "This New FREE AI Agent Lets You Vibe Scrape  or Automate ANY Site (Insane use cases)",
+        "round":  3,
+        "video_id":  "_6VB3UtgNNs"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "The AI Agent Tutorial That Should\u0027ve Been Your First (no code)",
+        "channel":  "",
+        "video_id":  "GchXMRwuWxE",
+        "views":  ""
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "LLM vs RAG vs AI Agent — Which One Do You Need?",
+        "channel":  "",
+        "video_id":  "HF3H3qFNbGU",
+        "views":  ""
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Microsoft Agent Framework: The Open-Source Engine for Intelligent AI Agents",
+        "channel":  "",
+        "video_id":  "yOBcPuLLmuY",
+        "views":  ""
+    },
+    {
+        "query":  "agent framework",
+        "title":  "What is Microsoft Agent Framework? - 3 minute Overview",
+        "channel":  "",
+        "video_id":  "Q881t44hWng",
+        "views":  ""
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Data Governance Explained in 5 Minutes",
+        "round":  2,
+        "video_id":  "uPsUjKLHLAg"
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "What\u0027s The Difference Between AI Agents And Agentic AI?",
+        "round":  2,
+        "video_id":  "QZT8NORYJc4"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "Intro to Agent Builder",
+        "round":  2,
+        "video_id":  "44eFf-tRiSg"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "AI DevOps Project - Terraform Drift Detector.",
+        "round":  3,
+        "video_id":  "6mvBMLWRPGs"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "AI Agents– Simple Overview of Brain, Tools, Reasoning and Planning",
+        "round":  3,
+        "video_id":  "OBg0_nsRXcw"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "AWS Just Released an AI DevOps Agent - Should You Be Worried?",
+        "round":  3,
+        "video_id":  "7WIu7wCm9KA"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "Your AI Bot Is A Security Risk! Fix It With n8n Guardrails!",
+        "round":  3,
+        "video_id":  "dTBy6SRAi8U"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Build a multi-agent system | Hands On AI (Part 1)",
+        "channel":  "",
+        "video_id":  "rHtRWyxVQps",
+        "views":  ""
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Building Deep Agents with Scale AI and Temporal",
+        "round":  2,
+        "video_id":  "auRLiaJ1uJk"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "Top Open-Source GitHub Projects : openpilot, Grafana, Electrobun, Agent Reach \u0026 AWS Blocks #270",
+        "round":  2,
+        "video_id":  "9AGo3GEcT_M"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Deploying Agentic AI in production",
+        "round":  2,
+        "video_id":  "ozwEXoepf2A"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "Revolutionizing Healthcare with AI Agents | Live Demo of Intelligent Diagnosis \u0026 Treatment Workflow",
+        "round":  3,
+        "video_id":  "VzcypHvzcKg"
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "EP76: Orchestrating Multi-Agent Systems: Patterns and Strategies for AI-Driven Innovation",
+        "round":  2,
+        "video_id":  "ROctq36qNWI"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "What Stops AI From Going Rogue",
+        "round":  3,
+        "video_id":  "1vXQOX9Yr9I"
+    },
+    {
+        "query":  "Gemini agent platform",
+        "title":  "Introducing Gemini Enterprise (in less than a minute)",
+        "round":  2,
+        "video_id":  "GI9wJLvHBdc"
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Security, privacy, and governance for AI and Agents",
+        "round":  2,
+        "video_id":  "Sx7FUZXgifc"
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "How to Build a Copilot AI Finance Agent, Demo \u0026 Build - By a Microsoft Engineer",
+        "round":  3,
+        "video_id":  "jY9NskwGIzs"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Agent Registry in Gemini Enterprise Agent Platform",
+        "channel":  "",
+        "video_id":  "kwGucVT2cN4",
+        "views":  ""
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "GitLab 18.5: Human-AI Collaboration with New Agents \u0026 UI",
+        "round":  2,
+        "video_id":  "MPpYy0LwycQ"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Rylan Talerico on Zep: A Temporal Knowledge Graph Architecture for Agent Memory [PWL NYC]",
+        "round":  3,
+        "video_id":  "TPGlkaHXu0A"
+    },
+    {
+        "query":  "Gemini agent platform",
+        "title":  "New Google Gemini AI Agents are INSANE!",
+        "round":  2,
+        "video_id":  "7pmGdc078PY"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "The Power of AI Agents and Agentic AI Explained",
+        "channel":  "",
+        "video_id":  "2j26a5dmCnI",
+        "views":  ""
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Ketch Agent Network: AI-Powered Privacy Operations | Product Demo",
+        "round":  2,
+        "video_id":  "r6x7k03skUc"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "Build Reliable AI Agents with LangGraph",
+        "round":  3,
+        "video_id":  "E0BtW2yt2pA"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Multi-Agent Systems Have NEVER Been EASIER to Build (n8n, no code)",
+        "channel":  "",
+        "video_id":  "0iUNOmeU7O4",
+        "views":  ""
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "Browser Use: FREE AI Agent CAN CONTROL BROWSERS \u0026 DO ANYTHING! (Beats Anthropic!)",
+        "round":  3,
+        "video_id":  "dGjztcS2zG0"
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Guide to Architect Secure AI Agents: Best Practices for Safety",
+        "round":  2,
+        "video_id":  "UMYtqHptYvA"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "How to Monitor, Debug, and Trust Agentic AI Systems - Observability in Agentic AI",
+        "round":  3,
+        "video_id":  "GNFWAhcPYN4"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "Reasoning Models and Planning - with Rao Kambhampati (Arizona State)",
+        "round":  3,
+        "video_id":  "TZihPdBZAls"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "Guardrails: How to prevent jailbreak of your AI Agent",
+        "round":  3,
+        "video_id":  "bSkJfSLihBY"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Agentic AI Explained So Anyone Can Get It!",
+        "channel":  "",
+        "video_id":  "Jj1-zb38Yfw",
+        "views":  ""
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "Full Walkthrough: Workflow for AI Coding — Matt Pocock",
+        "channel":  "",
+        "video_id":  "-QFHIoCo-Ko",
+        "views":  ""
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "How to Use Agentic AI: LLMs, AI Agents \u0026 Prompt Engineering in Action",
+        "channel":  "",
+        "video_id":  "bwvfdFWR1RI",
+        "views":  ""
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Complete Agentic AI Course In 10 Hours- Langchain, Langgraph, RAG,Vectorless RAG, Guardrails,Evals",
+        "channel":  "",
+        "video_id":  "rV3HJ4LEZ7k",
+        "views":  ""
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "Reasoning, Planning, and Autonomous Agents",
+        "round":  3,
+        "video_id":  "-OdcEly2zUU"
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Microsoft Agent Framework Tutorial 2025 - Build AI Agents with Python from Scratch | Complete Course",
+        "channel":  "",
+        "video_id":  "EAeUiipzCTE",
+        "views":  ""
+    },
+    {
+        "query":  "agent tool",
+        "title":  "What Are Orchestrator Agents? AI Tools Working Smarter Together",
+        "channel":  "",
+        "video_id":  "X3XJeTApVMM",
+        "views":  ""
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Multi-Agent Systems: Most People Get This Wrong",
+        "channel":  "",
+        "video_id":  "197HFo3NkmE",
+        "views":  ""
+    },
+    {
+        "query":  "agent platform",
+        "title":  "PwC’s agent OS: The AI agent platform for enterprises",
+        "channel":  "",
+        "video_id":  "YariVg6S5nc",
+        "views":  ""
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Foundry Agent Service + Microsoft Agent Framework Explained",
+        "channel":  "",
+        "video_id":  "iR7_57lJOz8",
+        "views":  ""
+    },
+    {
+        "query":  "AI agent assistant workflow automation",
+        "title":  "Automate Everything with Zapier AI Agents (Step-by-Step Beginner Guide)",
+        "round":  2,
+        "video_id":  "avQMU1yJkyY"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "Scrape the web for OpenAI — with the Atlas browser!",
+        "round":  3,
+        "video_id":  "8jh4sCW4pz4"
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "NIST AI Agents Explained: Building Trusted, Secure \u0026 Compliant AI Systems",
+        "round":  2,
+        "video_id":  "WuEUiQYkr9Y"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "CrewAI Tutorial: Multiple Agents Working Together in Python",
+        "round":  3,
+        "video_id":  "I90xJlzAUW0"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "How to Build (Custom) AI Agents with MCP",
+        "round":  3,
+        "video_id":  "w-Ml3NivoFo"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "How AI agents \u0026 Claude skills work (Clearly Explained)",
+        "channel":  "",
+        "video_id":  "S_oN3vlzpMw",
+        "views":  ""
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "This AI Does Your Job While You Sleep (Autonomous Agents Explained)",
+        "channel":  "",
+        "video_id":  "azZtbrpl28s",
+        "views":  ""
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "AI Observability explained | Gain insight into your AI models and agents",
+        "round":  3,
+        "video_id":  "i1dp2-3Kvj8"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Architecting Agent Memory: Principles, Patterns, and Best Practices — Richmond Alake, MongoDB",
+        "round":  3,
+        "video_id":  "W2HVdB4Jbjs"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "BigTool: Agents with large number of tools",
+        "channel":  "",
+        "video_id":  "3ISRS2hQlfI",
+        "views":  ""
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "How AI Agents Think — Reasoning, Planning \u0026 Decision-Making Explained | Core Agent Systems Part 3",
+        "round":  3,
+        "video_id":  "ewiG6K66fvI"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "Agentic AI Tutorial for Beginners | Langgraph Tutorial",
+        "round":  3,
+        "video_id":  "CnXdddeZ4tQ"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "How To Use AI Agents To Do ALL Your Work - Full CrewAI Course for Beginners",
+        "round":  3,
+        "video_id":  "ONKOXwucLvE"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "Building Effective Agents with LangGraph",
+        "channel":  "",
+        "video_id":  "aHCDrAbH_go",
+        "views":  ""
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "How to Evaluate AI Agents: Comprehensive Strategies for Reliable, High‑Quality Agentic Systems",
+        "round":  2,
+        "video_id":  "gsMRpZdMEIQ"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "New Hermes Browser Use Agents are INSANE!",
+        "round":  3,
+        "video_id":  "txOV9xNgw9g"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "Adv. LLM Agents MOOC | UC Berkeley Sp25 | Reasoning, Memory \u0026 Planning of Language Agents by Yu Su",
+        "round":  3,
+        "video_id":  "zvI4UN2_i-w"
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Evaluator - Optimizer Design Pattern | Agentic Workflow | Human in the Loop, LangChain, Python",
+        "round":  3,
+        "video_id":  "SknYgMpC-VI"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Antitrust in Healthcare",
+        "round":  2,
+        "video_id":  "DF7o8ekuC6g"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Microsoft 365 Copilot Agents Explained in 90 Seconds (New AI Tool)",
+        "round":  2,
+        "video_id":  "JR_-7C19rmE"
+    },
+    {
+        "query":  "agent framework",
+        "title":  "AutoGen vs CrewAI vs LangGraph – Best AI Agent Framework In 2025!",
+        "channel":  "",
+        "video_id":  "8HqeY5v0ohM",
+        "views":  ""
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "AI Agents, AI Workflow - Explained",
+        "channel":  "",
+        "video_id":  "wpxvQi7mpno",
+        "views":  ""
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "Browser Use: This New AI Agent Can Do Anything (Full AI Scraping Tutorial)",
+        "round":  3,
+        "video_id":  "zGkVKix_CRU"
+    },
+    {
+        "query":  "agent swarm collective intelligence",
+        "title":  "Swarm Intelligence  How AI Agents Work Together",
+        "round":  3,
+        "video_id":  "GfDmVR8Mbf8"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "How AI is transforming healthcare across the country",
+        "round":  3,
+        "video_id":  "5kwyuYJ2xEA"
+    },
+    {
+        "query":  "Gemini agent platform",
+        "title":  "How to Use Agentic AI for Business with Gemini Enterprise | Gemini at Work - Lesson 6",
+        "round":  2,
+        "video_id":  "uDr0xdA_E_A"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "Integrating Model Context Protocol (MCP) Tools with Strands Agents (How-to)",
+        "round":  3,
+        "video_id":  "bHSbjCZZFjE"
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "Stanford CME295 Transformers \u0026 LLMs | Autumn 2025 | Lecture 7 - Agentic LLMs",
+        "channel":  "",
+        "video_id":  "h-7S6HNq0Vg",
+        "views":  ""
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Understanding AI Agent Security: Safeguard LLM Systems Effectively",
+        "round":  2,
+        "video_id":  "SAYmsKxNDF4"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "What is AI Observability? And is it enough?",
+        "round":  3,
+        "video_id":  "v_SPcIGOJvs"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "AI Agents vs AI Assistants (Explained Simply) — What’s the Real Difference?",
+        "channel":  "",
+        "video_id":  "wBx28qTAOis",
+        "views":  ""
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Deploying AI at Enterprise Scale - ElevenLabs Summit",
+        "round":  2,
+        "video_id":  "HdelDovObRU"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Agentic AI Architecture Explained | RAG vs Agents, Memory, Embeddings \u0026 Multi-Agent Systems",
+        "round":  3,
+        "video_id":  "acZb4eGGg3E"
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Daily Log: Delegating My Workflow to AI Agents While Fixing My Obsidian Workspace",
+        "round":  2,
+        "video_id":  "Y3a4S762i2s"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Building AI Agents that actually work (Full Course)",
+        "channel":  "",
+        "video_id":  "eA9Zf2-qYYM",
+        "views":  ""
+    },
+    {
+        "query":  "AI agent",
+        "title":  "AI Agents Explained: How to Create and Use AI Agents in 2026",
+        "channel":  "",
+        "video_id":  "4TvH-OZhwxI",
+        "views":  ""
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Everything You Need to Know About LLMs and Data Privacy in 6 Minutes",
+        "round":  2,
+        "video_id":  "oYJD_fE8a1U"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Multi-agent Systems Explained in 17 Minutes",
+        "channel":  "",
+        "video_id":  "Mi5wOpAgixw",
+        "views":  ""
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "Stanford CME295 Transformers \u0026 LLMs | Autumn 2025 | Lecture 8 - LLM Evaluation",
+        "round":  2,
+        "video_id":  "8fNP4N46RRo"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "How to Use Guardrails in OpenAI Agent Builder",
+        "round":  3,
+        "video_id":  "KP7aUcCkY5U"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "Top 7 AI Agent Tools That Actually Work",
+        "channel":  "",
+        "video_id":  "_vLi76x43b0",
+        "views":  ""
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "How to Build a Personal Assistant AI Agent in n8n (Step-by-Step, No Code)",
+        "channel":  "",
+        "video_id":  "ZP4fjVWKt2w",
+        "views":  ""
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "Agentic AI in DevOps — The Skill Every Cloud Engineer Needs in 2026",
+        "round":  3,
+        "video_id":  "nCk42mA832s"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Vertical Marketing Secrets",
+        "round":  2,
+        "video_id":  "JV4BbnsHk_4"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "AI Agents vs. workflows, clearly explained with realistic examples",
+        "channel":  "",
+        "video_id":  "0jg2g3sNvgw",
+        "views":  ""
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "AI Agents Just Changed Forever: GLM 5.2, Codex Skills, Claude \u0026 Cursor",
+        "round":  3,
+        "video_id":  "Nbynj-mKcNI"
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "3 AI Stocks Insiders Are Selling. Most Aren\u0027t Ready for What Happens Next.",
+        "round":  3,
+        "video_id":  "IG_WnhheGtY"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "AWS DevOps Agent integration with Datadog | Amazon Web Services",
+        "round":  3,
+        "video_id":  "aY4_o_bfXOg"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "16. Planning \u0026 Reasoning Systems | Agent Harness Engineering",
+        "round":  3,
+        "video_id":  "x3cu751zLyk"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Antitrust in Healthcare",
+        "round":  2,
+        "video_id":  "NBGouJ8z_Q8"
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "Agent Builder vs. Copilot Studio vs. AI Foundry — Which One Should You Use?",
+        "round":  2,
+        "video_id":  "1SjvK7Z_Mvc"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Master ALL 20 Agentic AI Design Patterns [Complete Course]",
+        "channel":  "",
+        "video_id":  "e2zIr_2JMbE",
+        "views":  ""
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "How to Deploy an AI Agent Using Azure AI Foundry (Step-by-Step Tutorial)",
+        "round":  2,
+        "video_id":  "A67ZtskU4yw"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "Agent mode tools in VS Code",
+        "channel":  "",
+        "video_id":  "VePxCcF99w4",
+        "views":  ""
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "AI Agents + LLM Reasoning: Transforming Autonomous Workflows",
+        "channel":  "",
+        "video_id":  "2ihEirLXeas",
+        "views":  ""
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "AgentHub – Agent-First Collaboration Platform",
+        "round":  2,
+        "video_id":  "G41oaVVWzTQ"
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "I Tested 6 AI Voice Agent Platforms: Here’s the Worst",
+        "round":  2,
+        "video_id":  "sDvtiF5qQik"
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "How I Work With AI Agents in My Obsidian Second Brain (Discord as an IDE)",
+        "round":  2,
+        "video_id":  "XyCjdIo9nus"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "I Tried EVERY AI Agent (Here\u0027s What\u0027s ACTUALLY Good)",
+        "channel":  "",
+        "video_id":  "e0kKm5TfQwM",
+        "views":  ""
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "The Unbeatable Local AI Coding Workflow (Full 2026 Setup)",
+        "round":  2,
+        "video_id":  "3zSANOIBHYw"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "Everything You Need To Know About Agent Observability — Danny Gollapalli \u0026 Zubin Koticha, Raindrop",
+        "round":  3,
+        "video_id":  "-aM2EDTiaMs"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "What do Multi-Agent Architectures look like?",
+        "channel":  "",
+        "video_id":  "4e3lK7OhuOg",
+        "views":  ""
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Building distributed multi-agent systems",
+        "channel":  "",
+        "video_id":  "VjBijrS19gY",
+        "views":  ""
+    },
+    {
+        "query":  "agent framework",
+        "title":  "On .NET Live | Building Real-World AI Agents with Agent Framework",
+        "channel":  "",
+        "video_id":  "1k2jyvmx3i0",
+        "views":  ""
+    },
+    {
+        "query":  "AI agent",
+        "title":  "What are AI Agents?",
+        "channel":  "",
+        "video_id":  "F8NKVhkZZWI",
+        "views":  ""
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Top 10 Security Risks in AI Agents Explained",
+        "round":  2,
+        "video_id":  "soFWS8NBcSU"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "How to Test GenAI Agents in Production: MLflow Tracing \u0026 Evaluation Deep Dive",
+        "round":  2,
+        "video_id":  "J92rI0IUmAI"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "CrewAI Tutorial For Beginners 2026 | How To Create Multi Agent Workflow With CrewAI | Simplilearn",
+        "round":  3,
+        "video_id":  "hbvm_q8xBTw"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "What is Agentic AI and How Does it Work?",
+        "channel":  "",
+        "video_id":  "15_pppse4fY",
+        "views":  ""
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Microsoft Agent Framework WorkFlows Explained",
+        "channel":  "",
+        "video_id":  "KQ09sMHeFQY",
+        "views":  ""
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Twin AI Review - (2026) | The Easiest Way to Build Autonomous Agents? (NO CODE)",
+        "channel":  "",
+        "video_id":  "4brxG56ig7Y",
+        "views":  ""
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "AI Agents Are a Scam",
+        "channel":  "",
+        "video_id":  "7T0jVJWZt0w",
+        "views":  ""
+    },
+    {
+        "query":  "AI agent",
+        "title":  "How to Build \u0026 Sell AI Agents: Ultimate Beginner’s Guide",
+        "channel":  "",
+        "video_id":  "w0H1-b044KY",
+        "views":  ""
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Power Apps: Reimagine the human-agent collaboration | BRK323",
+        "round":  2,
+        "video_id":  "matmvydKkmM"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Nvidia planning to launch open-source AI agent platform, report says",
+        "channel":  "",
+        "video_id":  "d-W0Syev-vI",
+        "views":  ""
+    },
+    {
+        "query":  "agent tool integration ecosystem",
+        "title":  "X MCP Server Tutorial: Build AI Agents with the X.com API",
+        "round":  2,
+        "video_id":  "nhCu-gD2hL0"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "AI Agents, Clearly Explained",
+        "channel":  "",
+        "video_id":  "FwOTs4UxQS4",
+        "views":  ""
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "What is Human In The Loop with AI? How HITL Shapes AI Systems",
+        "round":  3,
+        "video_id":  "9iS-YYLIXiw"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Microsoft Copilot Tutorial",
+        "round":  2,
+        "video_id":  "d-CuF6dlqLg"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "How I Built a Web Scraping AI Agent - Use AI To Scrape ANYTHING",
+        "round":  3,
+        "video_id":  "G5djZjdxVvo"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "What AI Agent Skills Are and How They Work",
+        "channel":  "",
+        "video_id":  "Lg-meK5IU8Q",
+        "views":  ""
+    },
+    {
+        "query":  "agent tool integration ecosystem",
+        "title":  "How to Build an AI Agent That Interacts With All Your Data Sources",
+        "round":  2,
+        "video_id":  "LHKhYH0xDSg"
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Evaluating AI Agent Reliability for Production",
+        "round":  2,
+        "video_id":  "GptxTMHwJZY"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "Introducing AWS DevOps Agent | Amazon Web Services",
+        "round":  3,
+        "video_id":  "fMQfzwS0prQ"
+    },
+    {
+        "query":  "autonomous agent real world example",
+        "title":  "AI Agents in Action - Learn with Real World Examples of Intelligent AI Agents",
+        "round":  2,
+        "video_id":  "ICGIxpTodrA"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "AI Agents Revolutionizing Medical Device Diagnostics: A Smarter Approach to Healthcare Operations",
+        "round":  3,
+        "video_id":  "OODvdDodIKM"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "Input Guardrail, Output Guardrail \u0026 Tripwire | OpenAI Agent SDK Series #5",
+        "round":  3,
+        "video_id":  "oz14_x0PKDo"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "How to Build a Simple AI Agent Using LangGraph in 5 minutes",
+        "round":  3,
+        "video_id":  "MJGRImUXTqU"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Securing \u0026 Governing Autonomous AI Agents: Risks \u0026 Safeguards",
+        "channel":  "",
+        "video_id":  "E_yPUsCpoC8",
+        "views":  ""
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "Armchair Architects: Multi-agent Orchestration and Patterns",
+        "round":  2,
+        "video_id":  "Dwyx8GomVvQ"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "The Blueprint for Autonomous Work Agents | Gavriel Cohen, NanoClaw",
+        "channel":  "",
+        "video_id":  "hLUGXO5DSpo",
+        "views":  ""
+    },
+    {
+        "query":  "agent system design architecture",
+        "title":  "Choosing the Right Multi-Agent Architecture",
+        "round":  2,
+        "video_id":  "fqvbxkgU6vE"
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "AI Agent Finance Advisor-1  helps us analyzing financial data of a company before investing in it\u0027s",
+        "round":  3,
+        "video_id":  "kYlzZLGGmak"
+    },
+    {
+        "query":  "agent system design architecture",
+        "title":  "Claude\u0027s Internal Architecture Revealed | How AI Agents Actually Work",
+        "round":  2,
+        "video_id":  "szaszUEmjfU"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "The Future of Healthcare  Robots vs Doctors in Diagnosing Diseases",
+        "round":  3,
+        "video_id":  "fGCYnh3tWfw"
+    },
+    {
+        "query":  "AI agent assistant workflow automation",
+        "title":  "10 Insane AI Agent Use Cases in n8n! (steal these)",
+        "round":  2,
+        "video_id":  "Dt6u-yFEpsk"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "Learning, Reasoning, and Planning with Neuro-Symbolic Concepts–Jiayuan Mao (MIT)",
+        "round":  3,
+        "video_id":  "g3-uFiCQ_KI"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "Agent Observability Demo — Reliability from Data to Agent",
+        "round":  3,
+        "video_id":  "jj-owNZchAI"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "7 Game-Changing ChatGPT Agents That 99% of People Don\u0027t Know About",
+        "channel":  "",
+        "video_id":  "USRfRv34HmQ",
+        "views":  ""
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "AI Security Crisis: Jailbreaks, Prompt Injection \u0026 How to Protect Your Agents",
+        "round":  3,
+        "video_id":  "Bzckf0zOTPo"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "How AI is Changing DevOps Careers | What You Need to Know",
+        "round":  3,
+        "video_id":  "QQ4UyZNXof8"
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "AWS re:Invent 2025 - Build and scale AI: from reliable agents to transformative systems (INV204)",
+        "round":  2,
+        "video_id":  "tqHCjUSRKxc"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Agentic AI Crash Course using LangChain | LangChain Crash Course",
+        "channel":  "",
+        "video_id":  "D74el9mvNak",
+        "views":  ""
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "AWS re:Invent 2025 - Beyond a Chatbot: How to Build Intelligent Agent Memory (AIM284)",
+        "round":  3,
+        "video_id":  "asWTC3oc-SA"
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Why I don\u0027t use Workflows in Microsoft Agent Framework [AI in C#]",
+        "channel":  "",
+        "video_id":  "v7BNrSC9SUk",
+        "views":  ""
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Python + Agents: Adding a human in the loop to agentic workflows",
+        "round":  3,
+        "video_id":  "7pGqASn-LEY"
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "Open Source AI In 17 Minutes",
+        "round":  3,
+        "video_id":  "1uCE0uoKXL8"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Multi Agent Systems - a complete guide with hands-on using LangGraph | Agent Design Pattern",
+        "channel":  "",
+        "video_id":  "RXOvZIn-oSA",
+        "views":  ""
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Jani Eväkallio: Human-Machine Collaboration",
+        "round":  2,
+        "video_id":  "vWLjFilgd2M"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "What is CrewAI? The Ultimate Beginner\u0027s Guide to Agentic AI",
+        "round":  3,
+        "video_id":  "gzSVAlrnrcI"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "AI in Healthcare: Diagnosing Diseases",
+        "round":  3,
+        "video_id":  "olsOCfbpQRI"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "Building an AI Agent Swarm in n8n Just Got So Easy",
+        "channel":  "",
+        "video_id":  "vpyllOeLhs4",
+        "views":  ""
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Teaching AI to Fight Fires: Autonomous Reliability Agents at Meta Scale| Gaurav Metra from Meta",
+        "round":  2,
+        "video_id":  "qxc1kM-Hgow"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "Metrics for Measuring AI Agent Quality",
+        "round":  2,
+        "video_id":  "-0v6N3QVJus"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Google Gemini Enterprise Agent Platform Update",
+        "channel":  "",
+        "video_id":  "tZb2V1ULYPc",
+        "views":  ""
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Which AI agent framework to use",
+        "channel":  "",
+        "video_id":  "ODwF-EZo_O8",
+        "views":  ""
+    },
+    {
+        "query":  "agent swarm collective intelligence",
+        "title":  "Swarm Intelligence Unveiled: Overview, Applications, Challenges, and Future Prospects",
+        "round":  3,
+        "video_id":  "jdDBnqpHhdE"
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "Building the digital workforce: Multi-agent apps with Azure AI Foundry | BRK148",
+        "round":  2,
+        "video_id":  "0tIzhAFzY34"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "9 Best Web Scraping Tools for 2026 (+AI Scraping Agents)",
+        "round":  3,
+        "video_id":  "f5eb46JT2Zk"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Insurance Industry Overview - Insurance Products",
+        "round":  2,
+        "video_id":  "AHBiWGGmClU"
+    },
+    {
+        "query":  "Gemini agent platform",
+        "title":  "Gemini Enterprise Agent Platform Explained for Enterprise AI Agents",
+        "round":  2,
+        "video_id":  "T45lhn-btmo"
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Real-Time Multimodal Agents, Interface of Human-Machine Collaboration, The Architecture of Omni-Per",
+        "round":  2,
+        "video_id":  "u4mX8dBLYCE"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "This Copilot Agent ANSWERS Your EMAILS! Build it in Microsoft Copilot Studio By a Microsoft Engineer",
+        "round":  2,
+        "video_id":  "4s7Qa_cYZyQ"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "The agent evaluation revolution",
+        "round":  2,
+        "video_id":  "WZZLtwnZ4w0"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "How I Turned Claude Into My Personal Assistant (Full Guide)",
+        "channel":  "",
+        "video_id":  "CvLkhGWZlvE",
+        "views":  ""
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "How to Build Enterprise AI Agents: Oracle Private Agent Factory Explained",
+        "round":  2,
+        "video_id":  "fPUiFx_ghCk"
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "Multi-Agent System: 4 AI Agent Orchestration Patterns You Must Know in 2025",
+        "round":  2,
+        "video_id":  "cBmPOCRgTsQ"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "Agentic Reasoning for LLMs: Autonomous Planning, Tool Use \u0026 Adaptive Multi-Agent Framework",
+        "round":  3,
+        "video_id":  "PGsruSv-ZaI"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "7 new open source AI tools you need right now…",
+        "round":  2,
+        "video_id":  "Xn-gtHDsaPY"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "What is AWS DevOps Agent? AWS DevOps Agent Explained with Architecture \u0026 Real Root-Cause | Demo",
+        "round":  3,
+        "video_id":  "9Z9dMseBbW4"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "LLM as a Judge: Scaling AI Evaluation Strategies",
+        "round":  2,
+        "video_id":  "trfUBIDeI1Y"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "Learn Multi AI Agent Systems with crewAI: Lesson 1",
+        "round":  3,
+        "video_id":  "d3WiKofD-34"
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "OpenCode: The BEST AI Coding Agent Ever! BYE Gemini CLI \u0026 ClaudeCode! (Opensource)",
+        "round":  3,
+        "video_id":  "ipY_e9sldFM"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Conceptual Guide: Multi Agent Architectures",
+        "channel":  "",
+        "video_id":  "4nZl32FwU-o",
+        "views":  ""
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Simulate to Scale: How realistic simulations power reliable agents in production // Sachi Shah",
+        "round":  2,
+        "video_id":  "Y68UD7jqQqE"
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Workflows - Human in the Loop [AI in C#]",
+        "round":  3,
+        "video_id":  "d-2blPmiuYA"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "High-tech hospital uses artificial intelligence in patient care",
+        "round":  3,
+        "video_id":  "qetKUFDDF4A"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Gemini Enterprise Agent Platform",
+        "channel":  "",
+        "video_id":  "t6Akeci5J8U",
+        "views":  ""
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Chen Goldberg Keynote Session | Scaling The Agentic Era",
+        "round":  2,
+        "video_id":  "SfBwIDEGx0A"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Build, Test, and Deploy Production-Ready Enterprise AI Agents in Minutes | with @InformaticaCorp",
+        "round":  2,
+        "video_id":  "P0kux8A8NbM"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "Google’s 2026 AI Agent Tool “Computer Use” Just Dropped — Here’s the Opportunity",
+        "channel":  "",
+        "video_id":  "AgjTVWgWPGU",
+        "views":  ""
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Compliance, Reliability, Observability: David Cusatis on Scaling Agents at Range",
+        "round":  2,
+        "video_id":  "5eoGrvoLG1Q"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Creating Autonomous Agents with Copilot Studio: The Future is NOW!",
+        "channel":  "",
+        "video_id":  "A0nnD9abDBA",
+        "views":  ""
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "Opencode Is Probably The Best Coding Agent I\u0027ve Ever Used",
+        "round":  3,
+        "video_id":  "e9j2iEwJru0"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Building Brain-Like Memory for AI | LLM Agent Memory Systems",
+        "round":  3,
+        "video_id":  "VKPngyO0iKg"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "Healthcare Scribe and Diagnostics Agent",
+        "round":  3,
+        "video_id":  "d8Xu2TQeEqU"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "From Zero to Your First AI Agent in 25 Minutes (No Coding)",
+        "channel":  "",
+        "video_id":  "EH5jx5qPabU",
+        "views":  ""
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "DevOps CI/CD Explained in 100 Seconds",
+        "round":  3,
+        "video_id":  "scEDHsr3APg"
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "Agent Zero vs OpenClaw: The Real Difference",
+        "round":  3,
+        "video_id":  "qCQszXeNFxA"
+    },
+    {
+        "query":  "autonomous agent real world example",
+        "title":  "Autonomous AI Agents,  Large Action Model and Microsoft Copilot",
+        "round":  2,
+        "video_id":  "SYHqSAWQ4NY"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "AI Agents Fundamentals In 21 Minutes",
+        "channel":  "",
+        "video_id":  "qU3fmidNbJE",
+        "views":  ""
+    },
+    {
+        "query":  "agent tool integration ecosystem",
+        "title":  "Amazon Bedrock AgentCore: Deploy \u0026 Operate AI Agents in Minutes | Amazon Web Services",
+        "round":  2,
+        "video_id":  "usFIb9aEd1U"
+    },
+    {
+        "query":  "agent framework",
+        "title":  "LangChain vs LangGraph: A Tale of Two Frameworks",
+        "channel":  "",
+        "video_id":  "qAF1NjEVHhY",
+        "views":  ""
+    },
+    {
+        "query":  "Gemini agent platform",
+        "title":  "Unifying vibe coding and production with Agent Studio on Gemini Enterprise Agent Platform",
+        "round":  2,
+        "video_id":  "kIormMwOl64"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "Model Context Protocol (MCP) Explained for Beginners: AI Flight Booking Demo!",
+        "round":  3,
+        "video_id":  "E2DEHOEbzks"
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Deploying Agentic AI at Scale: Infrastructure, Reliability, and Risk with Ran Aroussi",
+        "round":  2,
+        "video_id":  "AGyEnhDIo08"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Enterprise AI agents: the gap between prototype and production",
+        "round":  2,
+        "video_id":  "1DbWtkIscsk"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "You’re Not Behind (Yet): Learn AI Agents in 13 Minutes",
+        "channel":  "",
+        "video_id":  "P5sKKnWCvzk",
+        "views":  ""
+    },
+    {
+        "query":  "AI agent",
+        "title":  "Build \u0026 Sell n8n AI Agents (8+ Hour Course, No Code)",
+        "channel":  "",
+        "video_id":  "Ey18PDiaAYI",
+        "views":  ""
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Build Your Own AI Agents with Microsoft 365 Copilot",
+        "round":  2,
+        "video_id":  "211EGT_2x9c"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Agentic AI Explained: The Complete 2026 Guide",
+        "channel":  "",
+        "video_id":  "vbKKQATMZ-0",
+        "views":  ""
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "Artificial intelligence in healthcare: opportunities and challenges | Navid Toosi Saidy | TEDxQUT",
+        "round":  3,
+        "video_id":  "uvqDTbusdUU"
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Scaling AI Agents Without Breaking Reliability — Preeti Somal, Temporal",
+        "round":  2,
+        "video_id":  "1izYWsokr9s"
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "Claude\u0027s New Finance Agents: AI Just Changed Stock Picking",
+        "round":  3,
+        "video_id":  "XewJA0aXm4Q"
+    },
+    {
+        "query":  "agent system design architecture",
+        "title":  "AI Agents: Architecture, Usecases \u0026 Future Applications",
+        "round":  2,
+        "video_id":  "VDhQFBxIgtI"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "AI Agents with MCP Explained",
+        "round":  3,
+        "video_id":  "wGz955ZeLpc"
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "Stanford CS230 | Autumn 2025 | Lecture 8: Agents, Prompts, and RAG",
+        "channel":  "",
+        "video_id":  "k1njvbBmfsw",
+        "views":  ""
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "AI Agents for Stock Analysis: Using LLM\u0027s to Analyze Financial Documents",
+        "round":  3,
+        "video_id":  "gGOUdXef8sY"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Agent Memory - The Foundation of Agent Architecture",
+        "round":  3,
+        "video_id":  "ZiaOffGBytM"
+    },
+    {
+        "query":  "agent framework",
+        "title":  ".NET AI Community Standup - Getting Started with the Microsoft Agent Framework",
+        "channel":  "",
+        "video_id":  "KDxi3NG3nfU",
+        "views":  ""
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "How to Build Your Own Agentic AI System Using CrewAI？",
+        "round":  3,
+        "video_id":  "HMxFcB1AxFk"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Enterprise AI Agents Explained | SimplAI Live Demo, Governance \u0026 Real-World Use Cases",
+        "round":  2,
+        "video_id":  "nCXT2J6OPj0"
+    },
+    {
+        "query":  "agent system design architecture",
+        "title":  "Tips for building AI agents",
+        "round":  2,
+        "video_id":  "LP5OCa20Zpg"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Deploying AI Agents In The Enterprise",
+        "round":  2,
+        "video_id":  "cKGyiwsm66I"
+    },
+    {
+        "query":  "AI agent assistant workflow automation",
+        "title":  "NEW Copilot Workflows Agent Will Automate Your Job (Full Tutorial)",
+        "round":  2,
+        "video_id":  "_w-jVw8Uhc0"
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "Multi Agent Systems Explained: How AI Agents \u0026 LLMs Work Together",
+        "channel":  "",
+        "video_id":  "sWH0T4Zez6I",
+        "views":  ""
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Google Announces Gemini Enterprise Agent Platform: The Future of Agentic AI",
+        "channel":  "",
+        "video_id":  "3wMwdzxIyN0",
+        "views":  ""
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "Top Trending Open Source GitHub Projects This Week: AI Agents, OCR Compression, PrivacyBrowsing #201",
+        "round":  2,
+        "video_id":  "hwlg1jrcrO0"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "Full Hermes Agent Tutorial (Desktop) 🧠 A Useful Agentic AI Workflow",
+        "channel":  "",
+        "video_id":  "GL67DEf2nyI",
+        "views":  ""
+    },
+    {
+        "query":  "agent tool",
+        "title":  "Agent Skills - Yet Another Tool Standard?",
+        "channel":  "",
+        "video_id":  "sSqzg_W8OnA",
+        "views":  ""
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Creating multi-agent systems",
+        "channel":  "",
+        "video_id":  "c7yL_EduH9o",
+        "views":  ""
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "AI Agent of Trading 2026: Future of Finance",
+        "round":  3,
+        "video_id":  "Gy1yDYdHt2s"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "“Wait, this Agent can Scrape ANYTHING?!” - Build universal web scraping agent",
+        "round":  3,
+        "video_id":  "dSX5eoD4-u4"
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "MCP vs API: Simplifying AI Agent Integration with External Data",
+        "channel":  "",
+        "video_id":  "7j1t3UZA1TY",
+        "views":  ""
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "S1E08: Air Traffic Controller",
+        "round":  2,
+        "video_id":  "C4zrIfGgaMI"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Autonomous AI Agents Have Gone Too Far!",
+        "channel":  "",
+        "video_id":  "KGHoVptow30",
+        "views":  ""
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "Introducing Galileo\u0027s Agent Reliability Platform: The complete platform for trustworthy agentic AI.",
+        "round":  2,
+        "video_id":  "N_TsQ0sdV5k"
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "Anthropic’s NEW Claude Code Review Agent (Full Open Source Workflow)",
+        "round":  3,
+        "video_id":  "nItsfXwujjg"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "n8n JUST Leveled Up AI Agents With Guardrails: Here\u0027s How It Works",
+        "round":  3,
+        "video_id":  "oWdJMJp2HgM"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "AI Agents and AI Assistants: A Contrast in Function",
+        "channel":  "",
+        "video_id":  "IivxYYkJ2DI",
+        "views":  ""
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "CrewAI - Production-Grade Multi-Agent Systems",
+        "round":  3,
+        "video_id":  "7t7-SMMH9YM"
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Mastering AI Risk: NIST’s Risk Management Framework Explained",
+        "round":  2,
+        "video_id":  "0oeD2Wf25wY"
+    },
+    {
+        "query":  "agent system design architecture",
+        "title":  "8 Most Important System Design Concepts You Should Know",
+        "round":  2,
+        "video_id":  "BTjxUS_PylA"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "I Tried Microsoft CoPilot AI Analyst Agent… And It Blew My Mind!",
+        "round":  2,
+        "video_id":  "UxJIqYjs1-I"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "AI Agent evaluation: A complete guide to measuring performance",
+        "round":  2,
+        "video_id":  "4UiGmxMp68Y"
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Deep Dive into Microsoft Agent Framework for AutoGen Users",
+        "channel":  "",
+        "video_id":  "JlzteydCK_Q",
+        "views":  ""
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "How to Build a Finance AI Agent with Claude (Full Tutorial)",
+        "round":  3,
+        "video_id":  "tIzAsbPukHU"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "The Multi-Agent Architecture That Actually Ships — Luke Alvoeiro, Factory",
+        "channel":  "",
+        "video_id":  "ow1we5PzK-o",
+        "views":  ""
+    },
+    {
+        "query":  "agent platform",
+        "title":  "From Prototype to Production: Building with Gemini Enterprise Agent Platform",
+        "channel":  "",
+        "video_id":  "KWy9wbIp9dw",
+        "views":  ""
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "Orchestrating Complex AI Workflows with AI Agents \u0026 LLMs",
+        "channel":  "",
+        "video_id":  "OFq_CvRCpA0",
+        "views":  ""
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Demystifying Workflows with Microsoft Agent Framework",
+        "channel":  "",
+        "video_id":  "2BB9-kWb1Tc",
+        "views":  ""
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "Computer Use Agent: Extract Web Page Data In Copilot Studio",
+        "round":  3,
+        "video_id":  "isClxl1O_Zs"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "How Model Protection Stops Reasoning Leakage Jailbreaks Across AI Apps and Agents",
+        "round":  3,
+        "video_id":  "gMAM0zrdyhk"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Agent Zero: New FREE AI Autonomous Agent!",
+        "channel":  "",
+        "video_id":  "zu58GvaXmcg",
+        "views":  ""
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "Put AI to work for Observability",
+        "round":  3,
+        "video_id":  "TQjLFNpu4r8"
+    },
+    {
+        "query":  "autonomous agent real world example",
+        "title":  "10 Use Cases for AI Agents: IoT, RAG, \u0026 Disaster Response Explained",
+        "round":  2,
+        "video_id":  "Ts42JTye-AI"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "NEW Perplexity AI Super Agent Platform is INSANE!",
+        "channel":  "",
+        "video_id":  "t_AnG_wU4LY",
+        "views":  ""
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "Infrastructure with AI Agents for Dummies",
+        "round":  3,
+        "video_id":  "_j4epp_MqF4"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "What Are Large Reasoning Models (LRMs)? Smarter AI Beyond LLMs",
+        "round":  3,
+        "video_id":  "enLbj0igyx4"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "Claude\u0027s Model Context Protocol is here... Let\u0027s test it",
+        "round":  3,
+        "video_id":  "HyzlYwjoXOQ"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "LangGraph Agent Studio - Visualize A pandas Agent",
+        "round":  3,
+        "video_id":  "dPdBXK0xZQI"
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "5 Multi-Agent Orchestration Patterns You MUST Know in 2025!",
+        "round":  2,
+        "video_id":  "l_i7icCA56c"
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Maskin - Introducing Agent and Human Collaboration",
+        "round":  2,
+        "video_id":  "VskvM1QULZo"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Multi-agent systems, concepts \u0026 patterns | The Agent Factory Podcast",
+        "channel":  "",
+        "video_id":  "TGNScswE0kU",
+        "views":  ""
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Next in Privacy Innovation: AI Agents that Make Governance Scalable | Bridge Privacy Summit 2026",
+        "round":  2,
+        "video_id":  "D7FHQK-B2Qk"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "You NEED to try these 12 open-source AI projects RIGHT NOW",
+        "round":  2,
+        "video_id":  "2lmBj_XQq0I"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "AI Agents 6 - Memory, Learning, and Adapation",
+        "round":  3,
+        "video_id":  "fRaYh3ma2Rc"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "Agents vs Workflows: Why Not Both? — Sam Bhagwat, Mastra.ai",
+        "channel":  "",
+        "video_id":  "8SUJEqQNClw",
+        "views":  ""
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Build Hour: Agent Memory Patterns",
+        "round":  3,
+        "video_id":  "WsGVXiWzTpI"
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "Multi-Agent Orchestration Explained: From Patterns to Production",
+        "round":  2,
+        "video_id":  "EtSO9vU84ws"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "Anthropic Just Changed How Agents Call Tools. I Stole It for My Qwen3.5 Agent",
+        "channel":  "",
+        "video_id":  "R7OCrqyGMeY",
+        "views":  ""
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "AI Agent of Trading 2026: Future of Finance",
+        "round":  3,
+        "video_id":  "ovStRRxB4VE"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "AWS re:Invent 2025 - Observability for AI Agents and Traditional Workloads (COP335)",
+        "round":  3,
+        "video_id":  "oYpCvqZk9SQ"
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "Top 5 WhatsApp AI Agent Platforms for Business Teams (2026 Comparison)",
+        "round":  2,
+        "video_id":  "dWFYXI1WAE0"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Building agents with Copilot Studio and Microsoft Foundry | BRK314",
+        "round":  2,
+        "video_id":  "tGbcQZ4WeZ0"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "What Are AI Agents Really About?",
+        "channel":  "",
+        "video_id":  "eHEHE2fpnWQ",
+        "views":  ""
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "Model Context Protocol (MCP) Explained in 20 Minutes",
+        "round":  3,
+        "video_id":  "N3vHJcHBS-w"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "Agentic AI: Workflows vs. agents",
+        "channel":  "",
+        "video_id":  "Qd6anWv0mv0",
+        "views":  ""
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "The Anatomy of an [Enterprise] AI Agent",
+        "round":  2,
+        "video_id":  "IgbXfSdeV4c"
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Building Human in the Loop Agent Workflows",
+        "round":  3,
+        "video_id":  "n54ql6PKvIY"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Build a multi-agent system: A2A \u0026 Agent Registry",
+        "channel":  "",
+        "video_id":  "-MME36Ft9Gc",
+        "views":  ""
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Generative AI vs AI agents vs Agentic AI",
+        "channel":  "",
+        "video_id":  "O2gerCxEXvc",
+        "views":  ""
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Human–AI Interaction: Where Do Humans End and Machines Begin?",
+        "round":  2,
+        "video_id":  "zteh-BKyqIg"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "Build an observability agent in 10 minutes",
+        "round":  3,
+        "video_id":  "WBmlOYWD06M"
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Building a Human-in-the-Loop AI Agent for LinkedIn Content (n8n)",
+        "round":  3,
+        "video_id":  "kT1xrnWg08Q"
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "The AI Scaling Problem",
+        "round":  2,
+        "video_id":  "COOAssGkF6I"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "Python + Agents: Monitoring and evaluating agents",
+        "round":  2,
+        "video_id":  "3yS-G-NEBu8"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "LangGraph Explained for Beginners",
+        "round":  3,
+        "video_id":  "cUfLrn3TM3M"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "AI Agents – Single-agent vs Multi-agent Systems",
+        "channel":  "",
+        "video_id":  "sAm8aGH3hPw",
+        "views":  ""
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "How AI Agents Are Transforming Healthcare | The Future of Medical Assistance",
+        "round":  3,
+        "video_id":  "gYH4Q6VpTNI"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "Hacking AI is TOO EASY (this should be illegal)",
+        "round":  3,
+        "video_id":  "Qvx2sVgQ-u0"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "AI Agent Observability in Snowflake: Tracing, Evaluation \u0026 Production Monitoring",
+        "round":  3,
+        "video_id":  "2g1hinxhzYs"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "MCP Tutorial: Build Your First MCP Server and Client from Scratch (Free Labs)",
+        "round":  3,
+        "video_id":  "RhTiAOGwbYE"
+    },
+    {
+        "query":  "autonomous agent real world example",
+        "title":  "AWS re:Invent 2025 - Using Strands Agents to build autonomous, self-improving AI agents (AIM426)",
+        "round":  2,
+        "video_id":  "RQfW7eQsXqk"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "AWS DevOps Agent Explained: NEW AI-Powered Frontier Agent for Cloud Operations",
+        "round":  3,
+        "video_id":  "k5CDhHKHhVA"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Anatomy of Healthcare | The U.S. Healthcare System Explained",
+        "round":  2,
+        "video_id":  "dK4EV9wJPm0"
+    },
+    {
+        "query":  "agent tool integration ecosystem",
+        "title":  "AWS re:Invent 2025 - Scale agent tools with Amazon Bedrock AgentCore Gateway (AIM3313)",
+        "round":  2,
+        "video_id":  "DlIHB8i6uyE"
+    },
+    {
+        "query":  "autonomous agent real world example",
+        "title":  "7 AI Agents That Print Money in 2026 (Real Examples)",
+        "round":  2,
+        "video_id":  "M-BuvknrDYc"
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "Anatomy of AI Agents: Inside LLMs, RAG Systems, \u0026 Generative AI",
+        "channel":  "",
+        "video_id":  "CAKGKkWf0tI",
+        "views":  ""
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Healthcare Compliance: Antitrust",
+        "round":  2,
+        "video_id":  "8Dcd6FgtX_8"
+    },
+    {
+        "query":  "agent system design architecture",
+        "title":  "Design ChatGPT - System Design Mock Interview (with eBay EM)",
+        "round":  2,
+        "video_id":  "I9-PUPYZyiw"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "9. Azure Devops Pipeline Agents : Microsoft-hosted vs Self-hosted agents",
+        "round":  3,
+        "video_id":  "9Htv0-q90_4"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Introducing Agents CLI in Agent Platform",
+        "channel":  "",
+        "video_id":  "ECYKo70pPNc",
+        "views":  ""
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "AWS re:Invent 2025 - Implementing Human-in-the-Loop Controls for Multi-Agent AI Systems (CNS428)",
+        "round":  3,
+        "video_id":  "SC3pHo-CycI"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Agent memory architecture explained #agentmemory #workingmemory #episodicmemory",
+        "round":  3,
+        "video_id":  "Ir0Q9s6P050"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "NEW Nvidia Autonomous AI is WILD!! 🤯",
+        "channel":  "",
+        "video_id":  "I__GVrkeuZ4",
+        "views":  ""
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "How to Build Multi AI Agents with Langgraph",
+        "round":  2,
+        "video_id":  "rwqGQEzXF-o"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "EvoMap AI Review: The Self-Evolving AI Agent Platform That Remembers You",
+        "channel":  "",
+        "video_id":  "-NF8mred-uI",
+        "views":  ""
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "Claude Architect: Multi-Agent Orchestration",
+        "round":  2,
+        "video_id":  "vRYBG_R8JAI"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Unlock Autonomous Agent Capabilities with Copilot Studio",
+        "channel":  "",
+        "video_id":  "qxMi-tLg4MA",
+        "views":  ""
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Microsoft Copilot and AI Agents ecosystem explained - 2026 update",
+        "round":  2,
+        "video_id":  "nZ8g11YthYI"
+    },
+    {
+        "query":  "autonomous agent real world example",
+        "title":  "99% of Developers Don\u0027t Understand AI Agents!",
+        "round":  2,
+        "video_id":  "exjhaHmZk8g"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "Guardrails with LangChain: A Complete Crash Course for Building Safe AI Agents",
+        "round":  3,
+        "video_id":  "ruiLq0OzjkI"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Building Enterprise AI Agents: A Complete Step-by-Step Guide for 2026",
+        "round":  2,
+        "video_id":  "Nxa0woXQ17c"
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Human-in-the-Loop with Microsoft Agent Framework -  Approving AI Actions Before Execution",
+        "round":  3,
+        "video_id":  "nMh6ZxMc3N4"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Leena AI: Agentic AI Architecture For The Enterprise",
+        "round":  2,
+        "video_id":  "mhgyd7LzdGQ"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "Introduction to Monitoring and Evaluation - A basic course",
+        "round":  2,
+        "video_id":  "1NOBO4IOG5M"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "Deploy Your Own AI Assistant in Minutes | Hermes Agent Setup",
+        "channel":  "",
+        "video_id":  "mpUq6NMDb5E",
+        "views":  ""
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Master Copilot Agents for Microsoft 365 - Tips By a Microsoft Engineer",
+        "round":  2,
+        "video_id":  "TlIhjl0aw6I"
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Add a Human-in-the-Loop to Your LangChain Agent (Next.js + TypeScript Tutorial)",
+        "round":  3,
+        "video_id":  "tdOeUVERukA"
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "Automated Diagnostics in Healthcare: AI Helps, Doctors Decide",
+        "round":  3,
+        "video_id":  "XMa2HRf4rqo"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Agentic AI Engineering: Complete 4-Hour Workshop feat. MCP, CrewAI and OpenAI Agents SDK",
+        "channel":  "",
+        "video_id":  "LSk5KaEGVk4",
+        "views":  ""
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Agentic Runtime Security Explained: Securing Non‑Human Identities",
+        "round":  2,
+        "video_id":  "HtnlUosO3XA"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "This n8n AI Assistant Will Manage Your Life (Automate Everything)",
+        "channel":  "",
+        "video_id":  "iEzr0GdFitU",
+        "views":  ""
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "How to Build a Multi Agent AI System",
+        "channel":  "",
+        "video_id":  "gUrENDkPw_k",
+        "views":  ""
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "Every Way To Run Open Source AI Models",
+        "round":  2,
+        "video_id":  "vehYE1DfkZg"
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "Claude\u0027s Agents for Financial services: by Anthropic",
+        "round":  3,
+        "video_id":  "DS2zOGWKWcM"
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "Open Source vs Closed AI: LLMs, Agents \u0026 the AI Stack Explained",
+        "round":  3,
+        "video_id":  "_QfxGZGITGw"
+    },
+    {
+        "query":  "AI agent assistant workflow automation",
+        "title":  "How to Create AI Agent: From Zero to Fully Automated Freelancer (Step-by-Step)",
+        "round":  2,
+        "video_id":  "kWsmT6_zfEk"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "You’re Building CrewAI Wrong: Fix Your Multi-Agent Architecture",
+        "round":  3,
+        "video_id":  "yGaJndw1EBk"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "When millions of AI agents meet",
+        "channel":  "",
+        "video_id":  "V04bm-3d6EQ",
+        "views":  ""
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "Why MCP really is a big deal | Model Context Protocol with Tim Berglund",
+        "round":  3,
+        "video_id":  "FLpS7OfD5-s"
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "The Secret to Composable AI Agents (It’s Just Software Engineering)",
+        "round":  2,
+        "video_id":  "LfV0HeAuaiQ"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "Building AI Agent Systems and Scaling Challenges in Agentic AI",
+        "channel":  "",
+        "video_id":  "fCHe_fOqlYA",
+        "views":  ""
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Human-in-the-Loop (HITL) for AI Agents: Patterns and Best Practices",
+        "round":  3,
+        "video_id":  "YCFGjLjNOyw"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "LangGraph Tutorial - How to Build Advanced AI Agent Systems",
+        "round":  3,
+        "video_id":  "1w5cCXlh7JQ"
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "From Chaos to Choreography: Multi-Agent Orchestration Patterns That Actually Work — Sandipan Bhaumik",
+        "round":  2,
+        "video_id":  "2czYyrTzILg"
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "Claude Skills vs Copilot Agents | Which AI Actually Works?",
+        "round":  2,
+        "video_id":  "U6wjSzQZGzk"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "The most powerful AI Agent I’ve ever used in my life",
+        "channel":  "",
+        "video_id":  "D_YzcH0VsGY",
+        "views":  ""
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "What is MCP? Integrate AI Agents with Databases \u0026 APIs",
+        "round":  2,
+        "video_id":  "eur8dUO9mvE"
+    },
+    {
+        "query":  "agent system design architecture",
+        "title":  "How Senior Engineers Actually Build With AI in 2026 | Build a Full Stack Systems Architecture App",
+        "round":  2,
+        "video_id":  "14RP8liACqo"
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "Top 5 AI Agent Evaluation Tools (2025): Maxim AI, Langfuse, Arize | LLM Observability Comparison",
+        "round":  2,
+        "video_id":  "_-2i3pSRbCY"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "You NEED to try these open-source AI projects right now...",
+        "round":  2,
+        "video_id":  "sXVbWkoCVaA"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "Developers Finally Got an Open-Source Voice AI Platform (Dograh)",
+        "round":  2,
+        "video_id":  "xD9JEvfCH9k"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "OpenClaw Is Broken. This Is The Future of Autonomous Agents",
+        "channel":  "",
+        "video_id":  "Dtt4lO3goBk",
+        "views":  ""
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "What are Microsoft 365 Copilot agents and how to use them | Microsoft",
+        "round":  2,
+        "video_id":  "HhoBVKs66Ds"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Foundations of multi-agent systems with ADK",
+        "channel":  "",
+        "video_id":  "pX0_iIfRilU",
+        "views":  ""
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "AgentCore Observability: Monitor and Debug AI Agents with OpenTelemetry | AWS Show and Tell",
+        "round":  3,
+        "video_id":  "wWQgawUPr1k"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Agent for Enterprise Use Cases - Simplified and Detailed Explanation",
+        "round":  2,
+        "video_id":  "Cg2A3L58pY0"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "This n8n Guardrails Update Changes AI Automation Forever",
+        "round":  3,
+        "video_id":  "w2kYbgUl27E"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Copilot Cowork: A new way of getting work done",
+        "round":  2,
+        "video_id":  "mEM0pg-NtOk"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "Agentic AI With Langgraph And MCP Crash Course-Part 1",
+        "round":  3,
+        "video_id":  "dIb-DujRNEo"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Akademik dr Kostić i dr Kuzović: Debata- levica i desnica u 21 veku; kome pripada naša zemlja PREVOD",
+        "round":  2,
+        "video_id":  "UXdi-kLA3Kw"
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "#S2.01 Reliable AI Agents: A System Problem, Not a Model Feature - Csaba Tamas (Parloa)",
+        "round":  2,
+        "video_id":  "uAXesg-Io0A"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "AI and Agent Observability in Azure AI Foundry and Azure Monitor | BRK168",
+        "round":  3,
+        "video_id":  "QGVoTJLKnYk"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Guide to Agentic AI – Build a Python Coding Agent with Gemini",
+        "channel":  "",
+        "video_id":  "YtHdaXuOAks",
+        "views":  ""
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Python + Agents: Orchestrating advanced multi-agent workflows",
+        "channel":  "",
+        "video_id":  "WtZbDrd-RJg",
+        "views":  ""
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "LangGraph Complete Course for Beginners – Complex AI Agents with Python",
+        "round":  3,
+        "video_id":  "jGg_1h0qzaM"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "Protect Your LLM: Stop Prompt Injections and Jailbreaks in Azure AI Foundry",
+        "round":  3,
+        "video_id":  "MppNtk31jNY"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "AI Agents Full Course 2026: Master Agentic AI (2 Hours)",
+        "channel":  "",
+        "video_id":  "EsTrWCV0Ph4",
+        "views":  ""
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "CrewAI Tutorial | Agentic AI Tutorial",
+        "round":  3,
+        "video_id":  "G42J2MSKyc8"
+    },
+    {
+        "query":  "agent open source community project",
+        "title":  "Contributing to Open Source Can Change Your Life - Here’s How to Do It",
+        "round":  2,
+        "video_id":  "CML6vfKjQss"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "You’re Not Behind (Yet): How to Build AI Agents in 2026 (no coding)",
+        "channel":  "",
+        "video_id":  "ibFJ--CH3cQ",
+        "views":  ""
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "Stanford CME295 Transformers \u0026 LLMs | Autumn 2025 | Lecture 6 - LLM Reasoning",
+        "round":  3,
+        "video_id":  "k5Fh-UgTuCo"
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "How to Build an AI Agent with Claude Code (Claude AI Agent Tutorial)",
+        "channel":  "",
+        "video_id":  "bcM9dP_uXJU",
+        "views":  ""
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "Agent Observability: 3 Minute Demo",
+        "round":  3,
+        "video_id":  "fZHNJIy6h9Y"
+    },
+    {
+        "query":  "agent scaling production reliability",
+        "title":  "The AI Agent Path to Prod: Building for Reliability - Max Tkacz",
+        "round":  2,
+        "video_id":  "Nx7eeteARzU"
+    },
+    {
+        "query":  "multi agent orchestration pattern",
+        "title":  "Claude Code Multi-Agent Orchestration with Opus 4.6, Tmux and Agent Sandboxes",
+        "round":  2,
+        "video_id":  "RpUTF_U4kiw"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Gemini Enterprise Agent Platform is here. (RIP Vertex AI)",
+        "channel":  "",
+        "video_id":  "5MxBkBgdCJc",
+        "views":  ""
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "AI Agents in Healthcare: Saving Lives with Smart Technology (2025 Update)",
+        "round":  3,
+        "video_id":  "P8TqUThZkAA"
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Introducing Manus: The General AI Agent",
+        "channel":  "",
+        "video_id":  "K27diMbCsuw",
+        "views":  ""
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "ADK: Building Autonomous AI Agents Beyond LLMs",
+        "channel":  "",
+        "video_id":  "jb4AAFCRPrI",
+        "views":  ""
+    },
+    {
+        "query":  "agent tool",
+        "title":  "What is Tool Calling? Connecting LLMs to Your Data",
+        "channel":  "",
+        "video_id":  "h8gMhXYAv1k",
+        "views":  ""
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "What is crewAI? | The Future of AI Agents and Multiagent Systems Explained",
+        "round":  3,
+        "video_id":  "fvxW3v5Fa7I"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "Tutorial 1-Getting Started With LangGraph- Building Stateful Multi AI Agents",
+        "round":  3,
+        "video_id":  "gqvFmK7LpDo"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "AI Web Scraping Is Insanely Good | Browserbase Full Tutorial",
+        "round":  3,
+        "video_id":  "XTQTJoSfeMg"
+    },
+    {
+        "query":  "agent platform",
+        "title":  "Nvidia signals strategy shift with launch of open-source AI agent platform",
+        "channel":  "",
+        "video_id":  "5jdv7l4arX0",
+        "views":  ""
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "Guardrails and Gambits: Mastering AI Security Against Jailbreaking",
+        "round":  3,
+        "video_id":  "4nwIM3iEC0c"
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "The 7 Best AI Voice Agents Nobody\u0027s Talking About in 2026 (Best to Worst)",
+        "round":  2,
+        "video_id":  "WX-uWaXetdA"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "RAG Evaluation Explained | Measuring AI Quality the Right Way",
+        "round":  2,
+        "video_id":  "bN1EJzokO3M"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "Design, Develop, and Deploy Multi-Agent Systems with CrewAI",
+        "round":  3,
+        "video_id":  "guXhZ_q6sVY"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "The Four Types of Memory Every AI Agent Needs",
+        "round":  3,
+        "video_id":  "BacJ6sEhqMo"
+    },
+    {
+        "query":  "LangGraph agent tutorial",
+        "title":  "Turn Any LangGraph Agent Into a Voice Agent in Minutes",
+        "round":  3,
+        "video_id":  "i_Tf956Yh0U"
+    },
+    {
+        "query":  "enterprise AI agent deployment",
+        "title":  "Introducing Agentex: Open-Source Infrastructure for Enterprise AI Agents",
+        "round":  2,
+        "video_id":  "rEhkP6oztMw"
+    },
+    {
+        "query":  "agent framework",
+        "title":  "Getting Started with Microsoft Agent Framework (90-min)",
+        "channel":  "",
+        "video_id":  "HHy0-sXlmUY",
+        "views":  ""
+    },
+    {
+        "query":  "agent human collaboration interface",
+        "title":  "Power Apps: Reimagine Human and Agent Collaboration",
+        "round":  2,
+        "video_id":  "mpfaA6THsr0"
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "MiniMax Agent: The Claude Cowork Killer That\u0027s 10x Cheaper!",
+        "round":  3,
+        "video_id":  "kaWRYE10V5M"
+    },
+    {
+        "query":  "Microsoft AI agent Copilot",
+        "title":  "Copilot Studio Beginner to Pro | Full AI Chatbot Course 🤖💻",
+        "round":  2,
+        "video_id":  "-CT9kWDvLTE"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Explaining Agentic AI: The Good, the Bad \u0026 the Ugly",
+        "channel":  "",
+        "video_id":  "Gvt4TwGpqOs",
+        "views":  ""
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "Model Context Protocol Clearly Explained | MCP Beyond the Hype",
+        "round":  3,
+        "video_id":  "tzrwxLNHtRY"
+    },
+    {
+        "query":  "LLM agent",
+        "title":  "How Large Language Models Work",
+        "channel":  "",
+        "video_id":  "5sLYAQS9sWQ",
+        "views":  ""
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "They Fired Me Over Fake Safety Violations, Until I Canceled Their Structural Engineering License",
+        "round":  2,
+        "video_id":  "G5OJGk75Uuk"
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "crewAI Crash Course For Beginners-How To Create Multi AI Agent For Complex Usecases",
+        "round":  3,
+        "video_id":  "UV81LAb3x2g"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "LLM Observability Explained: Why do you need LLM Observability?",
+        "round":  3,
+        "video_id":  "o76xU3RQ47Q"
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "I Compared 7 AI Voice Agent Platforms",
+        "round":  2,
+        "video_id":  "8IyjiZmyh0Q"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "F5 AI Guardrails - Protecting from GenAI Jailbreaking",
+        "round":  3,
+        "video_id":  "rbFmArNo2Hk"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "Measure What Matters: Quality-Focused Monitoring for Production AI Agents",
+        "round":  2,
+        "video_id":  "RRpzbN3hV3I"
+    },
+    {
+        "query":  "agent devops cloud infrastructure",
+        "title":  "Agentic AI vs IaC: The Future of DevOps",
+        "round":  3,
+        "video_id":  "9c9tMUHidVM"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "Building custom tools for agents | The Agent Factory Podcast",
+        "channel":  "",
+        "video_id":  "NiLb5DK4_rU",
+        "views":  ""
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "Don\u0027t Analyse Stocks Without Claude\u0027s New Finance Agents (Full Install)",
+        "round":  3,
+        "video_id":  "8IQ8PttfmDU"
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "Learn human In the loop AI Agents in 15 minutes | Notes Included",
+        "round":  3,
+        "video_id":  "VbyhBbrr8n8"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "How I Turned Claude Into My Personal Assistant (Beginner Guide)",
+        "channel":  "",
+        "video_id":  "CAQ2pfhoPcs",
+        "views":  ""
+    },
+    {
+        "query":  "human in the loop agent workflow",
+        "title":  "The Secret to Making AI Agents 100% Reliable - Human in the Loop (n8n)",
+        "round":  3,
+        "video_id":  "CdnR-fNVPKI"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "BrowserAct: The Smartest AI Web Scraper Yet!",
+        "round":  3,
+        "video_id":  "IqwQA4-O4C0"
+    },
+    {
+        "query":  "browser use agent web scraping",
+        "title":  "Build an AI Agent That Scrapes the Web",
+        "round":  3,
+        "video_id":  "JG_INdktGsk"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Memory and dreaming for self-learning agents",
+        "round":  3,
+        "video_id":  "RtywqDFBYnQ"
+    },
+    {
+        "query":  "agent tool",
+        "title":  "What Is the Agent Tool Use Design Pattern?",
+        "channel":  "",
+        "video_id":  "vieRiPRx-gI",
+        "views":  ""
+    },
+    {
+        "query":  "agent swarm collective intelligence",
+        "title":  "Unleashing the Power of AI Agent Swarms: Intelligence in Unity",
+        "round":  3,
+        "video_id":  "SgKXCSCj_5I"
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Protecting Data in AI: Strategies for Security \u0026 Governance",
+        "round":  2,
+        "video_id":  "LyfG7SGRiZA"
+    },
+    {
+        "query":  "agentic AI",
+        "title":  "Generative vs Agentic AI: Shaping the Future of AI Collaboration",
+        "channel":  "",
+        "video_id":  "EDb37y_MhRw",
+        "views":  ""
+    },
+    {
+        "query":  "agent workflow",
+        "title":  "Build a proactive agent workflow with Claude Code",
+        "channel":  "",
+        "video_id":  "eSP7PLTXNy8",
+        "views":  ""
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "6 Open Source AI Agents — Which One Should You Use?",
+        "round":  3,
+        "video_id":  "o7EhI5PDlx0"
+    },
+    {
+        "query":  "agent open source tool comparison",
+        "title":  "Claude Code vs Open Source AI Agents — I Tested ALL 6 for 30 Days (The Truth) #claudecode #coding",
+        "round":  3,
+        "video_id":  "8UpnTLrbug4"
+    },
+    {
+        "query":  "agent memory system architecture",
+        "title":  "Memory for agents (conceptual video)",
+        "round":  3,
+        "video_id":  "JTL0yp85FsE"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "How Model Context Protocol (MCP) actually works",
+        "round":  3,
+        "video_id":  "cGuyrANVi4A"
+    },
+    {
+        "query":  "agent security guardrail jailbreak",
+        "title":  "How To Build Secure AI Agents With The NEW n8n Guardrails",
+        "round":  3,
+        "video_id":  "zRlbg_IfUuM"
+    },
+    {
+        "query":  "agent vertical industry healthcare finance legal education",
+        "title":  "Moving from Operational Manager to Strategic Leader",
+        "round":  2,
+        "video_id":  "GaSiJFYfXfA"
+    },
+    {
+        "query":  "multi agent system",
+        "title":  "Architecting multi-agent systems",
+        "channel":  "",
+        "video_id":  "j_l-9uNX2SA",
+        "views":  ""
+    },
+    {
+        "query":  "agent swarm collective intelligence",
+        "title":  "Swarm Intelligence in Agentic Systems",
+        "round":  3,
+        "video_id":  "cw-h-GdHYtQ"
+    },
+    {
+        "query":  "agent finance stock trading",
+        "title":  "🚀 Build an AI Finance Agent in Minutes | Step-by-Step Guide",
+        "round":  3,
+        "video_id":  "sMa6QZDZ7ZQ"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "5 Types of AI Agents: Autonomous Functions \u0026 Real-World Applications",
+        "channel":  "",
+        "video_id":  "fXizBc03D7E",
+        "views":  ""
+    },
+    {
+        "query":  "agent healthcare medical diagnosis",
+        "title":  "AI Agents in Healthcare: Revolutionizing Patient Care and Medical Innovation",
+        "round":  3,
+        "video_id":  "TLMwdJM25fQ"
+    },
+    {
+        "query":  "MCP agent tool protocol",
+        "title":  "AI Agent Protocols Explained: MCP, A2A, ACP and More",
+        "round":  3,
+        "video_id":  "tb0c70DROYE"
+    },
+    {
+        "query":  "agent observability monitoring",
+        "title":  "Datadog LLM Observability: Monitor and secure your AI workloads",
+        "round":  3,
+        "video_id":  "uA4pBu8leyU"
+    },
+    {
+        "query":  "AI agent",
+        "title":  "AI agents explained: Build your first agent in 8 minutes",
+        "channel":  "",
+        "video_id":  "Zqno_vux6d8",
+        "views":  ""
+    },
+    {
+        "query":  "agent platform comparison",
+        "title":  "Agent Skills vs MCP: What’s the difference?",
+        "round":  2,
+        "video_id":  "6wdvSH61xGw"
+    },
+    {
+        "query":  "agent planning reasoning system",
+        "title":  "How AI Agents Actually Work — Planning, Reasoning \u0026 the Agentic Loop",
+        "round":  3,
+        "video_id":  "QgUmJ6ZICwg"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "Free AI Call Evaluation Tool: Analyze Agent Performance \u0026 Improve Calls (Demo)",
+        "round":  2,
+        "video_id":  "L44TPdLHjp4"
+    },
+    {
+        "query":  "agent system design architecture",
+        "title":  "You Can Learn AI Agent System Design In 19 Min | RAG, Vector Database, Evals, Function Calling",
+        "round":  2,
+        "video_id":  "CyLYY_xb5bQ"
+    },
+    {
+        "query":  "agent security privacy governance",
+        "title":  "Security \u0026 AI Governance: Reducing Risks in AI Systems",
+        "round":  2,
+        "video_id":  "4QXtObc61Lw"
+    },
+    {
+        "query":  "AI assistant agent",
+        "title":  "Hermes Agent: Zero to Personal AI Assistant (1 Hour Course)",
+        "channel":  "",
+        "video_id":  "gb5TlGw6Uks",
+        "views":  ""
+    },
+    {
+        "query":  "autonomous agent",
+        "title":  "Autonomous Agents in Copilot Studio: The Future of AI is HERE!",
+        "channel":  "",
+        "video_id":  "_qzBIo6iZrA",
+        "views":  ""
+    },
+    {
+        "query":  "CrewAI multi agent",
+        "title":  "Why Your Single AI Agent Fails (Multi-Agent AI with CrewAI)",
+        "round":  3,
+        "video_id":  "ADt44fzTRNk"
+    },
+    {
+        "query":  "agent monitoring evaluation quality",
+        "title":  "Complete Beginner\u0027s Course on AI Evaluations in 50 Minutes (2025) | Aman Khan",
+        "round":  2,
+        "video_id":  "TL527yTpxlk"
+    }
+]
