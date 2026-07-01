@@ -71,6 +71,27 @@ fn build_cli() -> Command {
         .subcommand(Command::new("setup").about("Interactive configuration wizard"))
         .subcommand(Command::new("mcp-server").about("Start MCP server (JSON-RPC over stdio)"))
         .subcommand(
+            Command::new("youtube")
+                .about("Search YouTube videos or get video info")
+                .subcommand(
+                    Command::new("search")
+                        .about("Search YouTube")
+                        .arg(arg!(<QUERY> "Search query"))
+                        .arg(arg!(-n --limit <N> "Max results").value_parser(clap::value_parser!(usize)).default_value("10")),
+                )
+                .subcommand(
+                    Command::new("info")
+                        .about("Get video metadata")
+                        .arg(arg!(<VIDEO_ID> "YouTube video ID or URL")),
+                )
+                .subcommand(
+                    Command::new("subtitles")
+                        .about("Get video subtitles")
+                        .arg(arg!(<VIDEO_ID> "YouTube video ID or URL"))
+                        .arg(arg!(-l --lang <LANG> "Language code").default_value("en")),
+                ),
+        )
+        .subcommand(
             Command::new("format")
                 .about("Clean platform API output")
                 .arg(arg!(<PLATFORM> "Platform to format").value_parser(["xhs"])),
@@ -98,6 +119,7 @@ pub fn run() {
         Some(("watch", _)) => cmd_watch(),
         Some(("setup", _)) => cmd_setup(),
         Some(("mcp-server", _)) => crate::mcp_server::run_mcp_server(),
+        Some(("youtube", m)) => cmd_youtube(m),
         Some(("format", m)) => cmd_format(m),
         Some((name, _)) => eprintln!("Unknown command: {}", name),
         None => {}
@@ -670,4 +692,84 @@ fn cmd_format(sub_m: &clap::ArgMatches) {
         }
         _ => eprintln!("Unknown platform: {}", platform),
     }
+}
+
+fn cmd_youtube(m: &clap::ArgMatches) {
+    let ch = crate::channels::youtube::YouTubeChannel::new();
+    match m.subcommand() {
+        Some(("search", sm)) => {
+            let query = sm.get_one::<String>("QUERY").map(|s| s.as_str()).unwrap_or("");
+            let limit = *sm.get_one::<usize>("limit").unwrap_or(&10);
+            println!("Searching YouTube: \"{}\"...\n", query);
+            match ch.search_videos(query, limit) {
+                Ok(items) => {
+                    for (i, item) in items.iter().enumerate() {
+                        let renderer = item.pointer("/videoRenderer").or_else(|| item.as_object().and_then(|_| Some(item)));
+                        let r = renderer.unwrap_or(item);
+                        let title = r.pointer("/title/runs/0/text").and_then(|v| v.as_str()).unwrap_or("(no title)");
+                        let video_id = r.get("videoId").and_then(|v| v.as_str()).unwrap_or("");
+                        let url = format!("https://youtube.com/watch?v={}", video_id);
+                        let channel = r.pointer("/ownerText/runs/0/text").and_then(|v| v.as_str()).unwrap_or("");
+                        let views = r.get("viewCountText").and_then(|v| v.as_str()).unwrap_or(&r.get("shortViewCountText").and_then(|v| v.as_str()).unwrap_or(""));
+                        let length = r.get("lengthText").and_then(|v| v.as_str()).unwrap_or(&r.pointer("/lengthText/simpleText").and_then(|v| v.as_str()).unwrap_or(""));
+
+                        println!("{}. {}", i + 1, title);
+                        println!("   {}", url);
+                        if !channel.is_empty() { println!("   Channel: {}  |  Views: {}  |  {}", channel, views, length); }
+                        if let Some(desc) = r.pointer("/detailedMetadataSnippets/0/snippetText/runs/0/text").and_then(|v| v.as_str()) {
+                            println!("   {}", desc);
+                        }
+                        println!();
+                    }
+                    println!("Found {} results.", items.len());
+                }
+                Err(e) => eprintln!("Search failed: {}", e),
+            }
+        }
+        Some(("info", sm)) => {
+            let input = sm.get_one::<String>("VIDEO_ID").map(|s| s.as_str()).unwrap_or("");
+            let id = extract_video_id(input);
+            match ch.get_video_info(&id) {
+                Ok(info) => {
+                    let title = info.pointer("/videoDetails/title").and_then(|v| v.as_str()).unwrap_or("N/A");
+                    let author = info.pointer("/videoDetails/author").and_then(|v| v.as_str()).unwrap_or("N/A");
+                    let length = info.pointer("/videoDetails/lengthSeconds").and_then(|v| v.as_str()).unwrap_or("0");
+                    let views = info.pointer("/videoDetails/viewCount").and_then(|v| v.as_str()).unwrap_or("N/A");
+                    println!("Title: {}", title);
+                    println!("Author: {}", author);
+                    println!("Length: {}s  |  Views: {}", length, views);
+                    if let Some(desc) = info.pointer("/videoDetails/shortDescription").and_then(|v| v.as_str()) {
+                        println!("Description: {}", desc);
+                    }
+                }
+                Err(e) => eprintln!("Failed: {}", e),
+            }
+        }
+        Some(("subtitles", sm)) => {
+            let input = sm.get_one::<String>("VIDEO_ID").map(|s| s.as_str()).unwrap_or("");
+            let lang = sm.get_one::<String>("lang").map(|s| s.as_str()).unwrap_or("en");
+            let id = extract_video_id(input);
+            match ch.get_subtitles(&id, lang) {
+                Ok(text) => println!("{}", text),
+                Err(e) => eprintln!("Failed: {}", e),
+            }
+        }
+        _ => eprintln!("Usage: agent-reach youtube <search|info|subtitles> ..."),
+    }
+}
+
+fn extract_video_id(input: &str) -> String {
+    if let Ok(url) = url::Url::parse(input) {
+        if let Some(host) = url.host_str() {
+            if host.contains("youtube.com") || host.contains("youtu.be") {
+                if host.contains("youtu.be") {
+                    return url.path().trim_start_matches('/').to_string();
+                }
+                for (k, v) in url.query_pairs() {
+                    if k == "v" { return v.to_string(); }
+                }
+            }
+        }
+    }
+    input.to_string()
 }
