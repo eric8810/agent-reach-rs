@@ -695,6 +695,14 @@ fn cmd_format(sub_m: &clap::ArgMatches) {
     }
 }
 
+fn extract_text(val: &serde_json::Value, key: &str) -> String {
+    val.get(key)
+        .and_then(|v| v.get("simpleText").or(Some(v)))
+        .and_then(|v| v.as_str())
+        .unwrap_or("")
+        .to_string()
+}
+
 fn cmd_youtube(m: &clap::ArgMatches) {
     let ch = crate::channels::youtube::YouTubeChannel::new();
     match m.subcommand() {
@@ -713,9 +721,10 @@ fn cmd_youtube(m: &clap::ArgMatches) {
                             let title = r.pointer("/title/runs/0/text").and_then(|v| v.as_str()).unwrap_or("");
                             let video_id = r.get("videoId").and_then(|v| v.as_str()).unwrap_or("");
                             let channel = r.pointer("/ownerText/runs/0/text").and_then(|v| v.as_str()).unwrap_or("");
-                            let views = r.get("viewCountText").and_then(|v| v.as_str()).unwrap_or(&r.get("shortViewCountText").and_then(|v| v.as_str()).unwrap_or(""));
-                            let length = r.get("lengthText").and_then(|v| v.as_str()).unwrap_or(&r.pointer("/lengthText/simpleText").and_then(|v| v.as_str()).unwrap_or(""));
-                            let published = r.get("publishedTimeText").and_then(|v| v.as_str()).unwrap_or("");
+                            let views = extract_text(r, "viewCountText");
+                            if views.is_empty() { let _ = extract_text(r, "shortViewCountText"); }
+                            let length = extract_text(r, "lengthText");
+                            let published = extract_text(r, "publishedTimeText");
                             results.push(serde_json::json!({
                                 "title": title, "video_id": video_id, "channel": channel,
                                 "views": views, "length": length, "published": published
@@ -730,12 +739,14 @@ fn cmd_youtube(m: &clap::ArgMatches) {
                         let video_id = r.get("videoId").and_then(|v| v.as_str()).unwrap_or("");
                         let url = format!("https://youtube.com/watch?v={}", video_id);
                         let channel = r.pointer("/ownerText/runs/0/text").and_then(|v| v.as_str()).unwrap_or("");
-                        let views = r.get("viewCountText").and_then(|v| v.as_str()).unwrap_or(&r.get("shortViewCountText").and_then(|v| v.as_str()).unwrap_or(""));
-                        let length = r.get("lengthText").and_then(|v| v.as_str()).unwrap_or(&r.pointer("/lengthText/simpleText").and_then(|v| v.as_str()).unwrap_or(""));
+                        let views = extract_text(r, "viewCountText");
+                        let v2 = if views.is_empty() { extract_text(r, "shortViewCountText") } else { views.clone() };
+                        let len = extract_text(r, "lengthText");
+                        let pub_date = extract_text(r, "publishedTimeText");
 
                         println!("{}. {}", i + 1, title);
                         println!("   {}", url);
-                        if !channel.is_empty() { println!("   Channel: {}  |  Views: {}  |  {}", channel, views, length); }
+                        if !channel.is_empty() { println!("   Channel: {}  |  Views: {}  |  {}  |  {}", channel, v2, len, pub_date); }
                         if let Some(desc) = r.pointer("/detailedMetadataSnippets/0/snippetText/runs/0/text").and_then(|v| v.as_str()) {
                             println!("   {}", desc);
                         }
