@@ -77,7 +77,8 @@ fn build_cli() -> Command {
                     Command::new("search")
                         .about("Search YouTube")
                         .arg(arg!(<QUERY> "Search query"))
-                        .arg(arg!(-n --limit <N> "Max results").value_parser(clap::value_parser!(usize)).default_value("10")),
+                        .arg(arg!(-n --limit <N> "Max results").value_parser(clap::value_parser!(usize)).default_value("10"))
+                        .arg(arg!(--json "Output JSON instead of text").action(ArgAction::SetTrue)),
                 )
                 .subcommand(
                     Command::new("info")
@@ -700,9 +701,28 @@ fn cmd_youtube(m: &clap::ArgMatches) {
         Some(("search", sm)) => {
             let query = sm.get_one::<String>("QUERY").map(|s| s.as_str()).unwrap_or("");
             let limit = *sm.get_one::<usize>("limit").unwrap_or(&10);
-            println!("Searching YouTube: \"{}\"...\n", query);
+            let json_out = sm.get_flag("json");
+            if !json_out { println!("Searching YouTube: \"{}\"...\n", query); }
             match ch.search_videos(query, limit) {
                 Ok((items, _next_token)) => {
+                    if json_out {
+                        let mut results: Vec<serde_json::Value> = Vec::new();
+                        for item in &items {
+                            let renderer = item.pointer("/videoRenderer").or_else(|| item.as_object().and_then(|_| Some(item)));
+                            let r = renderer.unwrap_or(item);
+                            let title = r.pointer("/title/runs/0/text").and_then(|v| v.as_str()).unwrap_or("");
+                            let video_id = r.get("videoId").and_then(|v| v.as_str()).unwrap_or("");
+                            let channel = r.pointer("/ownerText/runs/0/text").and_then(|v| v.as_str()).unwrap_or("");
+                            let views = r.get("viewCountText").and_then(|v| v.as_str()).unwrap_or(&r.get("shortViewCountText").and_then(|v| v.as_str()).unwrap_or(""));
+                            let length = r.get("lengthText").and_then(|v| v.as_str()).unwrap_or(&r.pointer("/lengthText/simpleText").and_then(|v| v.as_str()).unwrap_or(""));
+                            let published = r.get("publishedTimeText").and_then(|v| v.as_str()).unwrap_or("");
+                            results.push(serde_json::json!({
+                                "title": title, "video_id": video_id, "channel": channel,
+                                "views": views, "length": length, "published": published
+                            }));
+                        }
+                        println!("{}", serde_json::to_string_pretty(&results).unwrap_or_default());
+                    } else {
                     for (i, item) in items.iter().enumerate() {
                         let renderer = item.pointer("/videoRenderer").or_else(|| item.as_object().and_then(|_| Some(item)));
                         let r = renderer.unwrap_or(item);
@@ -722,6 +742,7 @@ fn cmd_youtube(m: &clap::ArgMatches) {
                         println!();
                     }
                     println!("Found {} results.", items.len());
+                    } // close else
                 }
                 Err(e) => eprintln!("Search failed: {}", e),
             }
