@@ -25,7 +25,7 @@ use crate::utils::text::read_utf8_text;
 const INNERTUBE_BASE: &str = "https://www.youtube.com/youtubei/v1";
 const INNERTUBE_API_KEY: &str = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
 const INNERTUBE_CLIENT_NAME: &str = "WEB";
-const INNERTUBE_CLIENT_VERSION: &str = "2.20250623.00.00";
+const INNERTUBE_CLIENT_VERSION: &str = "2.20250625.01.00";
 
 const UA: &str = "Mozilla/5.0 (compatible; agent-reach/1.5.0)";
 const TIMEOUT_SECS: u64 = 15;
@@ -49,6 +49,11 @@ fn inner_tube_context() -> Value {
         "client": {
             "clientName": INNERTUBE_CLIENT_NAME,
             "clientVersion": INNERTUBE_CLIENT_VERSION,
+            "hl": "en",
+            "gl": "US",
+        },
+        "thirdParty": {
+            "embedUrl": "https://www.youtube.com/"
         }
     })
 }
@@ -128,7 +133,58 @@ impl YouTubeChannel {
     ///
     /// Returns the subtitle text (json3 format parsed to plain text).
     pub fn get_subtitles(&self, video_id: &str, lang: &str) -> Result<String, String> {
-        // 1. Get player response to find caption tracks
+        // Try yt-dlp first (handles YouTube anti-bot)
+        if crate::probe::command_exists("yt-dlp") {
+            let url = format!("https://youtube.com/watch?v={}", video_id);
+            let output = std::process::Command::new("yt-dlp")
+                .args(["--write-auto-sub", "--sub-lang", lang, "--skip-download",
+                       "--convert-subs", "vtt", "-o", "-", "--get-url", &url])
+                .output();
+            // Actually, let's use yt-dlp --write-sub --skip-download and read the file
+            let tmp = std::env::temp_dir().join(format!("yt_sub_{}", video_id));
+            let _ = std::process::Command::new("yt-dlp")
+                .args(["--write-auto-sub", "--sub-lang", lang, "--skip-download",
+                       "-o", &format!("{}", tmp.display()), &url])
+                .output();
+            let vtt = tmp.with_extension(format!("{}.vtt", lang));
+            if vtt.exists() {
+                if let Ok(raw) = std::fs::read_to_string(&vtt) {
+                    let _ = std::fs::remove_file(&vtt);
+                    // Strip VTT headers, return plain text
+                    let text: String = raw.lines()
+                        .filter(|l| !l.starts_with("WEBVTT") && !l.starts_with("Kind:") &&
+                               !l.starts_with("Language:") && !l.contains("-->") &&
+                               !l.trim().is_empty() && !l.starts_with("NOTE") && 
+                               !l.starts_with("STYLE"))
+                        .collect::<Vec<_>>().join(" ");
+                    if !text.is_empty() { return Ok(text); }
+                }
+            }
+        }
+
+        // Fall back to timedtext API
+        let url = format!(
+            "https://www.youtube.com/api/timedtext?v={}&lang={}&fmt=json3",
+            video_id, lang
+        );
+        if let Ok(raw) = simple_get(&url) {
+            if !raw.is_empty() && !raw.contains("<transcript>") {
+                if let Ok(events) = serde_json::from_str::<Value>(&raw) {
+                    let text = events.get("events").and_then(|v| v.as_array()).map(|arr| {
+                        arr.iter()
+                            .filter_map(|ev| ev.get("segs").and_then(|s| s.as_array()).map(|segs| {
+                                segs.iter()
+                                    .filter_map(|seg| seg.get("utf8").and_then(|u| u.as_str()))
+                                    .collect::<Vec<_>>().join("")
+                            }))
+                            .collect::<Vec<_>>().join(" ")
+                    }).unwrap_or_default();
+                    if !text.is_empty() { return Ok(text); }
+                }
+            }
+        }
+
+        // Last: InnerTube player
         let player = self.get_video_info(video_id)?;
 
         let tracks = player
