@@ -10,7 +10,6 @@
 
 use crate::channels::base::{Channel, CheckResult, CheckStatus};
 use crate::config::Config;
-use crate::probe::{probe_command, ProbeStatus};
 use url::Url;
 
 /// Xiaoyuzhou podcast channel — multi-backend with tiered fallback.
