@@ -702,7 +702,7 @@ fn cmd_youtube(m: &clap::ArgMatches) {
             let limit = *sm.get_one::<usize>("limit").unwrap_or(&10);
             println!("Searching YouTube: \"{}\"...\n", query);
             match ch.search_videos(query, limit) {
-                Ok(items) => {
+                Ok((items, _next_token)) => {
                     for (i, item) in items.iter().enumerate() {
                         let renderer = item.pointer("/videoRenderer").or_else(|| item.as_object().and_then(|_| Some(item)));
                         let r = renderer.unwrap_or(item);

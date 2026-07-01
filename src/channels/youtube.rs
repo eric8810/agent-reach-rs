@@ -193,12 +193,20 @@ impl YouTubeChannel {
     /// contains ~20 items; this method truncates to `limit`).
     ///
     /// Returns a Vec of video renderer objects from the response.
-    pub fn search_videos(&self, query: &str, limit: usize) -> Result<Vec<Value>, String> {
-        let body = json!({
+    pub fn search_videos(&self, query: &str, limit: usize) -> Result<(Vec<Value>, Option<String>), String> {
+        self.search_videos_with_continuation(query, limit, None)
+    }
+
+    /// Search with optional continuation token for pagination.
+    pub fn search_videos_with_continuation(&self, query: &str, limit: usize, continuation: Option<&str>) -> Result<(Vec<Value>, Option<String>), String> {
+        let mut body = json!({
             "query": query,
-            "params": "EgIQAQ%3D%3D",  // filter: videos only
+            "params": "EgIQAQ%3D%3D",
             "context": inner_tube_context(),
         });
+        if let Some(token) = continuation {
+            body["continuation"] = json!(token);
+        }
         let resp = inner_tube_post("search", &body)?;
 
         // Walk into contents.twoColumnSearchResultsRenderer.primaryContents
@@ -215,7 +223,13 @@ impl YouTubeChannel {
             })
             .unwrap_or_default();
 
-        Ok(items)
+        // Extract continuation token for next page
+        let next_token = resp
+            .pointer("/contents/twoColumnSearchResultsRenderer/primaryContents/sectionListRenderer/continuations/0/nextContinuationData/continuation")
+            .and_then(|v| v.as_str())
+            .map(|s| s.to_string());
+
+        Ok((items, next_token))
     }
 }
 
