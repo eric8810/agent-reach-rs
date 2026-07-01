@@ -133,28 +133,33 @@ impl YouTubeChannel {
     ///
     /// Returns the subtitle text (json3 format parsed to plain text).
     pub fn get_subtitles(&self, video_id: &str, lang: &str) -> Result<String, String> {
-        // Try yt-dlp first (handles YouTube anti-bot)
-        if crate::probe::command_exists("yt-dlp") {
-            let url = format!("https://youtube.com/watch?v={}", video_id);
-            let output = std::process::Command::new("yt-dlp")
-                .args(["--write-auto-sub", "--sub-lang", lang, "--skip-download",
-                       "--convert-subs", "vtt", "-o", "-", "--get-url", &url])
+        // Try yt-dlp via python -m (works even when yt-dlp binary isn't on PATH)
+        let py_candidates = [r"C:\Python312\python.exe", "python3", "python", "/usr/bin/python3", "/usr/bin/python"];
+        let py = py_candidates.iter().find(|c| {
+            std::process::Command::new(c).args(["-m", "yt_dlp", "--version"]).output().map(|o| o.status.success()).unwrap_or(false)
+        });
+
+        let url = format!("https://youtube.com/watch?v={}", video_id);
+        let tmp_base = std::env::temp_dir().join(format!("yt_sub_{}", video_id));
+
+        if let Some(py) = py {
+            let out = std::process::Command::new(py)
+                .args(["-m", "yt_dlp", "--write-auto-sub", "--sub-lang", lang, "--skip-download",
+                       "-o", &tmp_base.to_string_lossy(), &url])
+                .stdout(std::process::Stdio::null())
+                .stderr(std::process::Stdio::null())
                 .output();
-            // Actually, let's use yt-dlp --write-sub --skip-download and read the file
-            let tmp = std::env::temp_dir().join(format!("yt_sub_{}", video_id));
-            let _ = std::process::Command::new("yt-dlp")
-                .args(["--write-auto-sub", "--sub-lang", lang, "--skip-download",
-                       "-o", &format!("{}", tmp.display()), &url])
-                .output();
-            let vtt = tmp.with_extension(format!("{}.vtt", lang));
+
+            // yt-dlp writes: {tmp_base}.{lang}.vtt
+            let vtt_name = format!("{}.{}.vtt", tmp_base.file_stem().unwrap_or_default().to_string_lossy(), lang);
+            let vtt = tmp_base.with_file_name(&vtt_name);
             if vtt.exists() {
                 if let Ok(raw) = std::fs::read_to_string(&vtt) {
                     let _ = std::fs::remove_file(&vtt);
-                    // Strip VTT headers, return plain text
                     let text: String = raw.lines()
                         .filter(|l| !l.starts_with("WEBVTT") && !l.starts_with("Kind:") &&
                                !l.starts_with("Language:") && !l.contains("-->") &&
-                               !l.trim().is_empty() && !l.starts_with("NOTE") && 
+                               !l.trim().is_empty() && !l.starts_with("NOTE") &&
                                !l.starts_with("STYLE"))
                         .collect::<Vec<_>>().join(" ");
                     if !text.is_empty() { return Ok(text); }
